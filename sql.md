@@ -1,8 +1,8 @@
-## About SQL 
+# About sql 
 
-SQL is the database itself and the language to use the the database. MySQL, PostreSQL and some other are so called DBMS database management systems which make using the database easier.
+sql is the database itself and the language to use the database. Mysql, Postresql and some others are so called DBMS database management systems which make using the database easier.
 
-### SQL Datatypes
+### sql Datatypes
 
 To review the datatypes click [here](https://www.w3schools.com/sql/sql_datatypes.asp).
 
@@ -11,32 +11,33 @@ To review the datatypes click [here](https://www.w3schools.com/sql/sql_datatypes
 # Working with tables
 
 1. Will show all the databases we have:
-```SQL
+```sql
 show databases;
 ```
 
 2. Will create a new database:
-```SQL
+```sql
 CREATE DATABASE some_name;
 ```
 
 3. Will delete the specified database:
-```SQL
+```sql
 DROP DATABASE some_name;
 ```
 
-4. In a SQL server we can have more than one databases and to work with a specific one we can start using it by running the following command:
-```SQL
+4. In a sql server we can have more than one databases and to work with a specific one we can start using it by running the following command:
+```sql
 USE some_name;
 ```
-and similarly we can chick which database we use the following use:
-```SQL
+and we can check which database we are currently using with the following command:
+```sql
 SELECT database();
 ```
 
 5. Creating table:
-in here we specify the name of the columns and the data type of the respective column
-```SQL
+
+we specify the name of the columns and the data type of the respective column
+```sql
 CREATE TABLE people
     (
         name VARCHAR(25),
@@ -44,7 +45,7 @@ CREATE TABLE people
     );
 ```
 if we want some value to be always required we can do the following:
-```SQL
+```sql
 CREATE TABLE people
     (
         name VARCHAR(25) NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE people
     );
 ```
 and in case if value is still not provided we can set to be default value
-```SQL
+```sql
 CREATE TABLE people
     (
         name VARCHAR(25) DEFAULT 'nameless',
@@ -61,21 +62,21 @@ CREATE TABLE people
 ```
 
 6. Will show all the tables:
-```SQL
+```sql
 SHOW TABLES;
 ```
 
 7. Will show detailed information about the columns of a specific table
-```SQL
+```sql
 SHOW COLUMNS FROM people;
 ```
 or similar to above:
-```SQL
+```sql
 DESC people;
 ```
 
 8. Will delete specific table:
-```SQL
+```sql
 DROP TABLE people;
 ```
 
@@ -87,7 +88,7 @@ Primary key is a column of unique values to make all rows unique.
 In the primary key we provide as argument which column we want to be the primary key.
 If we have Auto increment added, we don't need to provide an id every time we add new row to the table.
 
-```SQL
+```sql
 CREATE TABLE students (
     student_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(100),
@@ -101,7 +102,7 @@ CREATE TABLE students (
 # Working with files
 Instead typing everything in terminal or something we can store our source code in a file. In that file for example we can create a table and add records to it.
 We can use files the following way:
-```SQL
+```sql
 source my_file.sql;
 ```
 
@@ -111,39 +112,40 @@ source my_file.sql;
 
 1. Will insert 1 row of data in the specific table
 the order of parameters must match
-```SQL
+```sql
 INSERT INTO students(name, grade)
 VALUES ("Ina", 5);
 ```
 
 2. Get all data from a table, all the columns
-```SQL
+```sql
 SELECT * FROM students;
 ```
 
 3. Get only specific columns
-```SQL
+```sql
 SELECT name, grade FROM students;
 ```
 
 4. Filtering only specific  data we want:
-```SQL
+```sql
 SELECT * FROM students WHERE grade=3;
 ```
 
 5. Using aliases for column names:
+
 aliases will not affect the actual data, but with them we can display columns with changed names in case we want that
-```SQL
+```sql
 SELECT student_id AS id FROM students;
 ```
 6. Update data:
 
-```SQL
+```sql
 UPDATE students SET grade=3 WHERE status='completed';
 ```
 
 7. Delete data:
-```SQL
+```sql
 DELETE FROM students WHERE grade<3;
 ```
 
@@ -157,7 +159,7 @@ You can find more about it [here](https://dev.mysql.com/doc/refman/8.0/en/string
 For more complex operations we can nest different functions.
 
 Here is example of CONCAT:
-```SQL
+```sql
 SELECT CONCAT(first_name, ' ', last_name) AS 'full name'
 FROM students;
 ```
@@ -169,39 +171,102 @@ FROM students;
 1. Getting only unique values from a column or multiple columns.
 
 When getting data from more than one column the records we get will be unique for the columns together not just individually for a column. Meaning that equal last names will be still obtained if the first name is unique.
-```SQL
+```sql
 SELECT DISTINCT first_name, last_name FROM students;
 ```
 
 2. Sort data.
+
 The default sort order is ascending for numbers and strings. If we sort by more than one column the columns are sorted one after another in the order we specified, for example first by grade and equal grades by name.
 
-```SQL
+```sql
 SELECT name, grade FROM students ORDER BY name;
 SELECT name, grade FROM students ORDER BY grade DESC;
 SELECT name, grade FROM students ORDER BY grade, name;
 ```
 
 3. Get only specific number of rows of data.
+
 With 2 parameters we can get only at specific range. For example starting at 10th and getting only 5 rows.
-```SQL
+```sql
 SELECT * FROM students ORDER BY grade DESC LIMIT 5;
 SELECT * FROM students ORDER BY grade DESC LIMIT 10, 5;
 ```
 
 4. Search for something.
+
 LIKE will search for matches in the specified column. It is case insensitive. The percent sign means it might there is something before or after what we search for. If we skip the first percent sign it means must not have anything before what we search for, the same applies for also the second percent sign.
 
-```SQL
+```sql
 SELECT title FROM movies WHERE title LIKE '%super%';
+SELECT title FROM movies WHERE title NOT LIKE '%super%';
 ```
 In case % sign is what we want to search for we have to use '\' to escape it.
+
+Not like does the opposite of like.
 
 
 # Aggregate functions
 
+These functions allow us to manipulate the data in different ways. You can read more about them [here](https://dev.mysql.com/doc/refman/8.0/en/functions.html).
+
 1. Count function will check for count of something we need.
-```SQL
-SELECT COUNT(first_name) FROM students;
+```sql
+SELECT COUNT(DISTINCT first_name) FROM students;
 ```
 
+2. Group by function can group data based on some condition.
+
+this function is usually not used on its own, because behind the scenes it creates group of rows, but if display it we will see only the first row of each group.
+
+```sql
+SELECT grades, COUNT(*) AS count FROM students GROUP BY grades;
+```
+
+3. Minimum value.
+
+```sql
+SELECT MIN(grade) FROM students;
+```
+
+---
+
+# Working with date and time
+
+Check this documentations for more [info](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html).
+
+---
+
+# Logical operators
+
+Check this documentations for more [info](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html).
+
+If working with date and time it is recommended to cast them.
+
+1. Logical AND
+
+```sql
+SELECT name, grades FROM students
+WHERE name = 'Ema' AND grades >= 5;
+```
+
+2. IN operator
+
+```sql
+SELECT name, grades FROM students
+WHERE name IN ('Ema', 'Toni', 'Miro');
+```
+
+3. Switch case
+
+here we will get 3 columns: name, grades and result. Result for each row will have value depending on the grade for each row.
+
+```sql
+SELECT name, grades, 
+    CASE
+        WHEN grades >= 5 THEN 'Excellent'
+        WHEN grades >= 3 THEN 'Good'
+        ELSE 'Study more'
+    END AS result
+FROM students;
+```
