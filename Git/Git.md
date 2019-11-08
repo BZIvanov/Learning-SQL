@@ -27,5 +27,23 @@
 - **git add .** - similar to the above command, but will be applied on all files, not just the one specified. This command will add files recursively, meaning files in nested folders also
 - **git commit -m "Some message text"** - will move files from staging are to the local repository, where we can proceed with pushing to the remote repository. -m stands for the message we want to provide
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
-- **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name
+- **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
+- **git log** - will display the history of the commits
 
+- **git branch -a** - will display all branches. There will be an '*', which shows the currently selected branch
+- **git branch somename** - will create a new branch. By just creating it, it will not be auto selected
+- **git checkout somename** - will select the branch we want to work on
+- **git checkout -b somename** - will do both operations of creating a new branch and selecting it
+- **git branch -m prevname newname** - will rename a branch
+- **git branch -d somename** - will delete a branch. We have to select other branch before that, because we can not delete the currently used branch
+- **git diff master somebranch** - will display differences between two branches
+
+- **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
+
+- **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
+- **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
+
+- **git mv previous-name.txt new-name.txt** - will rename the file
+
+### Tips
+- HEAD - points to the last commit on the current branch
