@@ -39,11 +39,21 @@
 - **git diff master somebranch** - will display differences between two branches
 
 - **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
+- **git rebase master** - while we are on our different from master branch and using rebase, what will happen will be: first all commits from master will be lined together and then all commits on our currently selected branch will be lined after the commits on the master branch.
+- **git rebase --abort** - if we end up in a conflict, with the abort command we go back at the point before we started rebasing. Or if we don't want to abort we can fix the conflicts in the files manually and with git status we can check if we fixed all correctly
+- **git rebase --continue** - if we had conflicts and fixed them manually instead abort we can continue with the rebasing
 
 - **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
 - **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
 
 - **git mv previous-name.txt new-name.txt** - will rename the file
+
+- **git stash save** - shorthand syntax is just git stash, because save is the default behaviour. This command with stash the changes we made and make our repo look like we never did some changes. Of course our changes will be kept in the stash. Untracked files (not previously existing in the repo) will not be included in the stash.
+- **git stash save -u** - will save in stash also the Untracked files
+- **git stash apply** - will give us back the changes we have stash saved previously
+- **git stash list** - will list a list with all the stashes we have/made
+- **git stash drop** - will remove the last stash we have. This is good to be done if we have already commited changes from the stash and we don't need the stash anymore
+- **git stash show stash@{1}** - if we have more than 1 stashes we can inspect the content of one of our stashes by providing its index
 
 ### Tips
 - HEAD - points to the last commit on the current branch
