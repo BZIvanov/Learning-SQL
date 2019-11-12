@@ -55,5 +55,12 @@
 - **git stash drop** - will remove the last stash we have. This is good to be done if we have already commited changes from the stash and we don't need the stash anymore
 - **git stash show stash@{1}** - if we have more than 1 stashes we can inspect the content of one of our stashes by providing its index
 
+- **git tag myTag** - this way we create the so called lightweight tag. Tags are just pointers to specific commits. Tags are created for the last commit on the current branch
+- **git tag -a v-1.0 -m "Some message"** - this way we create the so called annotated tag. It is common practice to name them as versions. Annotated tags contain more information.
+- **git tag --list** - will list the tags we have
+- **git show myTag** - will display information about the tag
+- **git tag --delete myTag** - will delete the specified tag
+- **git diff someTagName anotherTagName** - will display differences between 2 tagged commits
+
 ### Tips
 - HEAD - points to the last commit on the current branch
