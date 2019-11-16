@@ -64,5 +64,3 @@
 
 ### Tips
 - HEAD - points to the last commit on the current branch
-
-test
