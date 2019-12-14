@@ -1,3 +1,61 @@
+# Installing Docker for Ubuntu 19.10 eoan
+
+## Installing Client and the Server
+
+Open terminal and type *docker*. If you don't have it you will be suggested to install it by typing command:
+```bash
+sudo apt install docker.io
+```
+
+After the installation type in the terminal:
+```bash
+sudo docker version
+```
+
+You should be able to see version for the Client and version for the Server.
+
+## Installing Docker machine
+
+Additionally we need to install Docker machine. Go to the github repo **https://github.com/docker/machine/releases** to see the releases.
+Search for the On Linux install, it should look like something like the following command:
+
+```bash
+curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+chmod +x /tmp/docker-machine &&
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+```
+
+Copy the command from there, not from here in order to get the latest tag version.
+
+Wait for the process to finish and check if done correctly by typing:
+```bash
+docker-machine version
+```
+
+You should see the version of the docker-machine.
+
+## Installing Docker compose
+
+Additionally we need to install Docker compose. Go to the github repo **https://github.com/docker/compose/releases**.
+Search for the On Linux install, it should look like something like the following command:
+
+```bash
+sudo curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+
+If you get permission denied error use **sudo**
+Copy the command from there, not from here in order to get the latest tag version.
+
+Wait for the process to finish and check if done correctly by typing:
+```bash
+docker-compose --version
+```
+
+You should see the version of the docker compose.
+
+---
+
 ## General info
 
 **Image** - an Image is the application we want to run.
