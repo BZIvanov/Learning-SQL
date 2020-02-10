@@ -39,6 +39,8 @@
 - **git diff master somebranch** - will display differences between two branches
 
 - **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
+- **git merge --squash some-branch-name** - while we are on master branch for example, running this command will still merge the targeted branch to the master, but the difference is that all commits on the target branch will be combined as one. This is good if we are not interested to keep history of each individual commit on branch we want to merge. And after running this command we still need to do **commit** because we are merging all commits in one.
+
 - **git rebase master** - while we are on our different from master branch and using rebase, what will happen will be: first all commits from master will be lined together and then all commits on our currently selected branch will be lined after the commits on the master branch.
 - **git rebase --abort** - if we end up in a conflict, with the abort command we go back at the point before we started rebasing. Or if we don't want to abort we can fix the conflicts in the files manually and with git status we can check if we fixed all correctly
 - **git rebase --continue** - if we had conflicts and fixed them manually instead abort we can continue with the rebasing
