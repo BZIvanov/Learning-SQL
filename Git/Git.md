@@ -1,12 +1,16 @@
 # Git
 
+---
+
 ## Git workflow
 
 *Working directory **->** Staging area **->** Repository (.git folder) **<->** Remote repository*
 
 1. Files we have made changes on are initially in working directory. With the add command we can put them in the Staging area.
-2. Files added in Staging area can me moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the add command.
+2. Files added in Staging area can be moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the **add** command.
 3. With push command files from the local repository are updated in the remote repository.
+
+---
 
 ## Commands
 
@@ -21,7 +25,7 @@
 
 ### Repositoy
 
-- **git clone https://github.com/BZIvanov/Learning-SQL.git** - will clone remote repository, if we don't have it locally. The url is example, you can find it in GitHub
+- **git clone git@github.com:BZIvanov/Learning-SQL-and-Git.git** - will clone remote repository, if we don't have it locally. The url is example, you can find it in GitHub. Note that this is not simple url, because this is example with using SSH key. Check how to set your SSH key if you don't have one.
 - **git status** - will display the currently selected branch and the state of the repository, for example if it is up do date or commits are pending. Very often used operation to check what we need
 - **git add file.txt** - will put the specified file in the staging area, where the file is ready to be commited
 - **git add .** - similar to the above command, but will be applied on all files, not just the one specified. This command will add files recursively, meaning files in nested folders also

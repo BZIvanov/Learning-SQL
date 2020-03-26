@@ -7,4 +7,4 @@
 - **ls -al** - will list all files include .something files
 - **cd ..** - will move one folder back
 - **cd ../../** - will move two folders back and so one if we want to go back even more
-
+- **clear** - will clear the text on the console
