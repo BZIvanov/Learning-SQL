@@ -4,7 +4,7 @@
 
 ## Git workflow
 
-*Working directory **->** Staging area **->** Repository (.git folder) **<->** Remote repository*
+*Working directory **->** Staging area **->** Local Repository (.git folder) **<->** Remote repository*
 
 1. Files we have made changes on are initially in working directory. With the add command we can put them in the Staging area.
 2. Files added in Staging area can be moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the **add** command.
@@ -19,6 +19,8 @@
 - **git config --global user.name "Biser Ivanov"** - will set the global username, which will be used when pushing to the remote repository
 - **git config --global user.email "myemail@mail.com"** - will set the global e-mail, which will be used when pushing to the remote repository
 - **git config --global --list** - will display the currently used username and e-mail
+- **git config --global -e** - will open the default editor if we have one, should be VS code
+- **git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"** - will set notepad++ as global editor for Windows. But if you have VS code it should be already your global editor so no need to run this in most cases.
 
 ### Creating new repository
 - **git init my-project** - will create new repositoty locally and we can name it the way we want
@@ -33,6 +35,7 @@
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
 - **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
 - **git log** - will display the history of the commits
+- **git log -- myfile.txt** - will log the commits, which involve only the specific file we want to check
 
 - **git branch -a** - will display all branches. There will be an '*', which shows the currently selected branch
 - **git branch somename** - will create a new branch. By just creating it, it will not be auto selected
