@@ -1,5 +1,7 @@
 # Git
 
+We can save long inputs or common commands as aliases. If we have aliases we can find them in the global config file.
+
 ---
 
 ## Git workflow
@@ -43,26 +45,26 @@
 - **git checkout -b somename** - will do both operations of creating a new branch and selecting it
 - **git branch -m prevname newname** - will rename a branch
 - **git branch -d somename** - will delete a branch. We have to select other branch before that, because we can not delete the currently used branch
-- **git diff master somebranch** - will display differences between two branches
+- **git diff master somebranch** - will display differences between two branches. We can also compare with the remote repository in this way *git diff master origin/master* which will compare the master branch on the local and remote repository
 
 - **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
 - **git merge --squash some-branch-name** - while we are on master branch for example, running this command will still merge the targeted branch to the master, but the difference is that all commits on the target branch will be combined as one. This is good if we are not interested to keep history of each individual commit on branch we want to merge. And after running this command we still need to do **commit** because we are merging all commits in one.
 
 - **git rebase master** - while we are on our different from master branch and using rebase, what will happen will be: first all commits from master will be lined together and then all commits on our currently selected branch will be lined after the commits on the master branch.
 - **git rebase --abort** - if we end up in a conflict, with the abort command we go back at the point before we started rebasing. Or if we don't want to abort we can fix the conflicts in the files manually and with git status we can check if we fixed all correctly
-- **git rebase --continue** - if we had conflicts and fixed them manually instead abort we can continue with the rebasing
+- **git rebase --continue** - if we had conflicts and fixed them manually instead abort we can continue with the rebasing. We need to add the changes made
 
 - **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
 - **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
 
 - **git mv previous-name.txt new-name.txt** - will rename the file
 
-- **git stash save** - shorthand syntax is just git stash, because save is the default behaviour. This command with stash the changes we made and make our repo look like we never did some changes. Of course our changes will be kept in the stash. Untracked files (not previously existing in the repo) will not be included in the stash.
+- **git stash save** - shorthand syntax is just git stash, because save is the default behaviour. This command will stash the changes we made and make our repo look like we never did some changes. Of course our changes will be kept in the stash. Untracked files (not previously existing in the repo) will not be included in the stash.
 - **git stash save -u** - will save in stash also the Untracked files
 - **git stash apply** - will give us back the changes we have stash saved previously
 - **git stash list** - will list a list with all the stashes we have/made
 - **git stash drop** - will remove the last stash we have. This is good to be done if we have already commited changes from the stash and we don't need the stash anymore
-- **git stash show stash@{1}** - if we have more than 1 stashes we can inspect the content of one of our stashes by providing its index
+- **git stash show stash@{1}** - if we have more than 1 stashes we can inspect the content of one of our stashes by providing its index. We can use this kind of indexing for also other commands like drop and apply
 
 - **git tag myTag** - this way we create the so called lightweight tag. Tags are just pointers to specific commits. Tags are created for the last commit on the current branch
 - **git tag -a v-1.0 -m "Some message"** - this way we create the so called annotated tag. It is common practice to name them as versions. Annotated tags contain more information.
@@ -70,6 +72,10 @@
 - **git show myTag** - will display information about the tag
 - **git tag --delete myTag** - will delete the specified tag
 - **git diff someTagName anotherTagName** - will display differences between 2 tagged commits
+- **git tag -a v-1.0 a8f76r -m "Some message"** - will tag specific commit by id. This is in case we dont want to tag just the last commit
+- **git push origin master --tags** - will push to the remote repository all of our tags
+
+- **git fetch origin master** - it will update the references between remote and local repository
 
 ### Tips
 - HEAD - points to the last commit on the current branch
