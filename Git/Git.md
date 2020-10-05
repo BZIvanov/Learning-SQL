@@ -4,9 +4,15 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 
 ---
 
+## Git terminology
+
+- HEAD - it refers the currently selected / checkedout branch
+- detached head - means change the HEAD from the branch to specific commit. Each commit has unique name known as hash
+- hash - the specific name of each commit, that name is used to navigate through the whole tree
+
 ## Git workflow
 
-*Working directory **->** Staging area **->** Local Repository (.git folder) **<->** Remote repository*
+_Working directory **->** Staging area **->** Local Repository (.git folder) **<->** Remote repository_
 
 1. Files we have made changes on are initially in working directory. With the add command we can put them in the Staging area.
 2. Files added in Staging area can be moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the **add** command.
@@ -25,6 +31,7 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 - **git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"** - will set notepad++ as global editor for Windows. But if you have VS code it should be already your global editor so no need to run this in most cases.
 
 ### Creating new repository
+
 - **git init my-project** - will create new repositoty locally and we can name it the way we want
 
 ### Repositoy
@@ -39,13 +46,13 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 - **git log** - will display the history of the commits
 - **git log -- myfile.txt** - will log the commits, which involve only the specific file we want to check
 
-- **git branch -a** - will display all branches. There will be an '*', which shows the currently selected branch
+- **git branch -a** - will display all branches. There will be an '\*', which shows the currently selected branch
 - **git branch somename** - will create a new branch. By just creating it, it will not be auto selected
 - **git checkout somename** - will select the branch we want to work on
 - **git checkout -b somename** - will do both operations of creating a new branch and selecting it
 - **git branch -m prevname newname** - will rename a branch
 - **git branch -d somename** - will delete a branch. We have to select other branch before that, because we can not delete the currently used branch
-- **git diff master somebranch** - will display differences between two branches. We can also compare with the remote repository in this way *git diff master origin/master* which will compare the master branch on the local and remote repository
+- **git diff master somebranch** - will display differences between two branches. We can also compare with the remote repository in this way _git diff master origin/master_ which will compare the master branch on the local and remote repository
 
 - **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
 - **git merge --squash some-branch-name** - while we are on master branch for example, running this command will still merge the targeted branch to the master, but the difference is that all commits on the target branch will be combined as one. This is good if we are not interested to keep history of each individual commit on branch we want to merge. And after running this command we still need to do **commit** because we are merging all commits in one.
@@ -56,6 +63,8 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 
 - **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
 - **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
+- **git checkout HEAD^** - by selecting specific commit we detached the HEAD from the branch. And by using the ^ symbol we will select the first level ancestor of the HEAD, HEAD is now the currently selected commit
+- **git branch -f master HEAD~3** - will force the master branch to go back with 3 levels up in the tree
 
 - **git mv previous-name.txt new-name.txt** - will rename the file
 
@@ -78,4 +87,5 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 - **git fetch origin master** - it will update the references between remote and local repository
 
 ### Tips
+
 - HEAD - points to the last commit on the current branch
