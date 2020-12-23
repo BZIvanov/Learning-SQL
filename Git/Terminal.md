@@ -1,6 +1,6 @@
 # Commands
 
-Work in a bash terminal, because the normal one doesn't support all commands like *cat* for example.
+Work in a bash terminal, because the normal one doesn't support all commands like _cat_ for example.
 
 - **pwd** - (print working directory) - will display the currently open directory
 - **mkdir folder-name** - will create a new folder in the current directory

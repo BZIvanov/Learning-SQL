@@ -53,8 +53,9 @@ This way when we add record to the orders table we have to provide valid id whic
 ### Cross join
 
 It will join both tables in a way, where for each row from the first tables all the rows from the second table will be joined. For example first table first row joined with second table first row; then first table first row joined with second table second row and so on for all rows from second table, and then for all other rows from first table.
+
 ```sql
-SELECT * FROM customers, orders; 
+SELECT * FROM customers, orders;
 ```
 
 ### Inner join
