@@ -61,13 +61,13 @@ and you should see something like:
 
 ## run the installator
 
-1. Proceed with _Developer default_ option
-2. If you are asked for python connector just click _Next_
-3. Install the dependencies on the next page
+Note: White installing if you don't see _Product configuration_ option in the wizard on the left side menu go back to the website and click _Looking for previous GA versions_ and select some previous version and download that installing file. If you don't do this you will not see setting password and other options. Run again the installer, without uninstalling if you installed with the other installer.
+
+1. Proceed with _Full_ option
+2. If you are asked for python or other connector just click _Next_ and agree with _Yes_
+3. Execute and install the dependencies on the next page
 
 ## using workbench
-
-If you were not asked to setup password during installation read this [article]('https://phoenixnap.com/kb/how-to-reset-mysql-root-password-windows-linux').
 
 1. Click the plus sign to setup a connection
 
