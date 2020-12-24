@@ -1,14 +1,14 @@
-# About sql
+# About SQL
 
 sql is the database itself and the language to use the database. Mysql, Postresql and some others are so called DBMS database management systems which make using the database easier.
 
-### sql Datatypes
+# SQL Datatypes
 
 To review the datatypes click [here](https://www.w3schools.com/sql/sql_datatypes.asp).
 
 ---
 
-# Working with tables
+# Working with Databases and Tables
 
 1. Will show all the databases we have:
 
@@ -40,9 +40,11 @@ and we can check which database we are currently using with the following comman
 SELECT database();
 ```
 
+In Workbench the currently used table will be also with bold text.
+
 5. Creating table:
 
-we specify the name of the columns and the data type of the respective column
+We specify the name of the columns and the data type of the respective column. This is a very simple example, not very close to real scenario.
 
 ```sql
 CREATE TABLE people
@@ -72,7 +74,7 @@ CREATE TABLE people
     );
 ```
 
-6. Will show all the tables:
+6. Will show all the tables existing for the selected database:
 
 ```sql
 SHOW TABLES;
@@ -90,10 +92,16 @@ or similar to above:
 DESC people;
 ```
 
-8. Will delete specific table:
+8. Will delete specific table from the selected database:
 
 ```sql
 DROP TABLE people;
+```
+
+9. In same cases we might get warnings, for example if we provide too long text. In Workbench we can easily see them, but we can also use a command to display them:
+
+```sql
+SHOW warnings;
 ```
 
 ---
@@ -117,8 +125,7 @@ CREATE TABLE students (
 
 # Working with files
 
-Instead typing everything in terminal or something we can store our source code in a file. In that file for example we can create a table and add records to it.
-We can use files the following way:
+Instead typing everything in terminal or something we can store our source code in a file. In that file for example we can create a table and add records to it. We can use files the following way:
 
 ```sql
 source my_file.sql;
@@ -128,12 +135,11 @@ source my_file.sql;
 
 # Working with tables data
 
-1. Will insert 1 row of data in the specific table
-   the order of parameters must match
+1. Will insert 2 rows of data in the specific table, the order of parameters must match
 
 ```sql
 INSERT INTO students(name, grade)
-VALUES ("Ina", 5);
+VALUES ("Ina", 5), ("Ani", 8);
 ```
 
 2. Get all data from a table, all the columns
@@ -151,7 +157,7 @@ SELECT name, grade FROM students;
 4. Filtering only specific data we want:
 
 ```sql
-SELECT * FROM students WHERE grade=3;
+SELECT * FROM students WHERE grade = 3;
 ```
 
 5. Using aliases for column names:
