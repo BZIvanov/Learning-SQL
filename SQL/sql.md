@@ -171,13 +171,13 @@ SELECT student_id AS id FROM students;
 6. Update data:
 
 ```sql
-UPDATE students SET grade=3 WHERE status='completed';
+UPDATE students SET grade = 3 WHERE status = 'completed';
 ```
 
 7. Delete data:
 
 ```sql
-DELETE FROM students WHERE grade<3;
+DELETE FROM students WHERE grade < 3;
 ```
 
 ---
@@ -194,6 +194,18 @@ Here is example of CONCAT:
 ```sql
 SELECT CONCAT(first_name, ' ', last_name) AS 'full name'
 FROM students;
+```
+
+and example of SUBSTRING, which will return the last 3 symbols for each row in the table:
+
+```sql
+SELECT SUBSTRING(title, -3) FROM books;
+```
+
+we can also nest the different functions:
+
+```sql
+SELECT CONCAT(SUBSTRING(title, 1, 5), '...') AS 'short title' FROM books;
 ```
 
 ---
