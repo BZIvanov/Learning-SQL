@@ -268,7 +268,8 @@ SELECT COUNT(DISTINCT first_name) FROM students;
 
 2. Group by function can group data based on some condition.
 
-this function is usually not used on its own, because behind the scenes it creates group of rows, but if display it we will see only the first row of each group.
+This function is usually not used on its own, because behind the scenes it creates groups of rows, but if display it we will see only the first row of each group. In the below example COUNT will count for each group.
+So basically GROUP BY will create multiple tables based on the different grades and the SELECT will operate for each individual table.
 
 ```sql
 SELECT grades, COUNT(*) AS count FROM students GROUP BY grades;
@@ -278,6 +279,13 @@ SELECT grades, COUNT(*) AS count FROM students GROUP BY grades;
 
 ```sql
 SELECT MIN(grade) FROM students;
+```
+
+If we are selecting multiple columns we might want to do subselection, because the columns after select are independant and the min value is not necessary to be the same student. Without subqueries we would get the min value, but the student name would be the first in the table and with subquery we assure all columns will be for the same row.
+This is just an example, of course in terms of performance it would be better to use order by and get the first result, because using select twice is bad for performance.
+
+```sql
+SELECT name, grade FROM students WHERE grade = (SELECT MIN(grade) FROM students)
 ```
 
 ---
