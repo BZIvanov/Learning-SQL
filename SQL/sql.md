@@ -230,6 +230,12 @@ SELECT name, grade FROM students ORDER BY grade DESC;
 SELECT name, grade FROM students ORDER BY grade, name;
 ```
 
+In the below example 2 means by grade, because that is the second column we specified.
+
+```sql
+SELECT name, grade FROM students ORDER BY 2;
+```
+
 3. Get only specific number of rows of data.
 
 With 2 parameters we can get only at specific range. For example starting at 10th and getting only 5 rows.
@@ -248,9 +254,7 @@ SELECT title FROM movies WHERE title LIKE '%super%';
 SELECT title FROM movies WHERE title NOT LIKE '%super%';
 ```
 
-In case % sign is what we want to search for we have to use '\' to escape it.
-
-Not like does the opposite of like.
+In case % sign is what we want to search for, we have to use '\' to escape it.
 
 # Aggregate functions
 
