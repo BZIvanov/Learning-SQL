@@ -302,18 +302,20 @@ Check this documentations for more [info](https://dev.mysql.com/doc/refman/8.0/e
 
 If working with date and time it is recommended to cast them.
 
-1. Logical AND
+1. Logical AND and OR
 
 ```sql
-SELECT name, grades FROM students
-WHERE name = 'Ema' AND grades >= 5;
+SELECT name, grades FROM students WHERE name = 'Ema' AND grades >= 5;
 ```
 
-2. IN operator
+```sql
+SELECT name, grades FROM students WHERE name = 'Ema' OR grades != 5;
+```
+
+2. IN and NOT IN operator
 
 ```sql
-SELECT name, grades FROM students
-WHERE name IN ('Ema', 'Toni', 'Miro');
+SELECT name, grades FROM students WHERE name IN ('Ema', 'Toni', 'Miro');
 ```
 
 3. Switch case
@@ -324,7 +326,8 @@ here we will get 3 columns: name, grades and result. Result for each row will ha
 SELECT name, grades,
     CASE
         WHEN grades >= 5 THEN 'Excellent'
-        WHEN grades >= 3 THEN 'Good'
+        WHEN grades >= 4 THEN 'Good'
+        WHEN grades BETWEEN 2.5 AND 4 THEN 'Bad'
         ELSE 'Study more'
     END AS result
 FROM students;
