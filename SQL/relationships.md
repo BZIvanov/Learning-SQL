@@ -82,6 +82,10 @@ SELECT * FROM customers, orders;
 
 ### Inner join
 
+With inner join we will get only the rows where we have a match between the 2 tables.
+
+Inner join is the default one, so not neccessary to specify it.
+
 ```sql
 SELECT * FROM customers
 JOIN orders ON customers.id = orders.customer_id;
@@ -89,8 +93,18 @@ JOIN orders ON customers.id = orders.customer_id;
 
 ### Left join
 
+With left join we will get everything from the left table even if we don't have a match.
+
 ```sql
 SELECT * FROM customers
-LEFT JOIN orders
-    ON customers.id = orders.customer_id;
+LEFT JOIN orders ON customers.id = orders.customer_id;
+```
+
+### Right join
+
+With right join we will get everything from the right table even if we don't have a match.
+
+```sql
+SELECT * FROM customers
+RIGHT JOIN orders ON customers.id = orders.customer_id;
 ```
