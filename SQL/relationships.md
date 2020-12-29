@@ -12,7 +12,29 @@ For example User table where one user takes only one row and UserDetails table, 
 
 One row from one table is related to many rows from another table.
 
-For example Recipes table where recipe takes only one row and RecipeComments table, where for one recipe from the Recipes table are related many comments in the RecipeComments table.
+For example Customers table where customer takes only one row and Orders table, where for one customer from the Customers table are related many orders in the Orders table.
+
+In the Orders (many) table we will keep the id of the specific customer from the Customers (one) table.
+
+**Customers**
+
+| customer_id | name | email         |
+| ----------- | ---- | ------------- |
+| 1           | Ema  | ema@mail.com  |
+| 2           | Ina  | ina@mail.com  |
+| 3           | Toni | toni@mail.com |
+| 4           | Tina | tina@mail.com |
+
+**Orders**
+
+| order_id | order_date | amount | customer_id |
+| -------- | ---------- | ------ | ----------- |
+| 1        | 2020-07-21 | 21.99  | 1           |
+| 2        | 2020-08-11 | 12.00  | 1           |
+| 3        | 2020-06-19 | 23.45  | 2           |
+| 4        | 2020-11-09 | 9.50   | 3           |
+
+_Note: naming columns doesn't matter, not neccessary to be customer_id for both tables. We specify that reference when creating the table with foreign key._
 
 ---
 
