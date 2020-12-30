@@ -19,4 +19,4 @@ produce the following results:
 | Don          | Gaiman         | 1 book  |
 | Patti        | Smith          | 1 book  |
 
-Use the setup.sql file to create the table.
+_Use the setup.sql file to create the table._
