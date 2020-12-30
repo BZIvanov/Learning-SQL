@@ -4,7 +4,7 @@ SELECT first_name,
     WHEN Avg(grade) IS NULL THEN 'FAILING' 
     WHEN Avg(grade) >= 75 THEN 'PASSING' 
     ELSE 'FAILING' 
-  end AS passing_status 
+  END AS passing_status 
 FROM students 
   LEFT JOIN papers ON students.id = papers.student_id 
 GROUP BY students.id 
