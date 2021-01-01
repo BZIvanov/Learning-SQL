@@ -332,3 +332,17 @@ SELECT name, grades,
     END AS result
 FROM students;
 ```
+
+# More on SQL
+
+1. With union we can combine the results in a single table.
+
+The number of columns selected in the first select must match with the second select.
+
+The columns in the result table will be named based on the first select.
+
+```sql
+SELECT name, grade FROM students
+UNION
+SELECT teacher, age FROM teachers;
+```

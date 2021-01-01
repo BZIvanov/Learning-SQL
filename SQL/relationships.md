@@ -80,6 +80,12 @@ It will join both tables in a way, where for each row from the first tables all 
 SELECT * FROM customers, orders;
 ```
 
+or
+
+```sql
+SELECT * FROM customers CROSS JOIN orders;
+```
+
 ### Inner join
 
 With inner join we will get only the rows where we have a match between the 2 tables.
