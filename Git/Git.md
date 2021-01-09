@@ -61,6 +61,7 @@ _Working directory **->** Staging area **->** Local Repository (.git folder) **<
 - **git rebase --abort** - if we end up in a conflict, with the abort command we go back at the point before we started rebasing. Or if we don't want to abort we can fix the conflicts in the files manually and with git status we can check if we fixed all correctly
 - **git rebase --continue** - if we had conflicts and fixed them manually instead abort we can continue with the rebasing. We need to add the changes made
 
+- **git reset --soft HEAD~1** - will reset the last commit and will keep the changes on the working tree.
 - **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
 - **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
 - **git checkout HEAD^** - by selecting specific commit we detached the HEAD from the branch. And by using the ^ symbol we will select the first level ancestor of the HEAD, HEAD is now the currently selected commit
