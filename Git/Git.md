@@ -40,7 +40,7 @@ _Working directory **->** Staging area **->** Local Repository (.git folder) **<
 - **git status** - will display the currently selected branch and the state of the repository, for example if it is up do date or commits are pending. Very often used operation to check what we need
 - **git add file.txt** - will put the specified file in the staging area, where the file is ready to be commited
 - **git add .** - similar to the above command, but will be applied on all files, not just the one specified. This command will add files recursively, meaning files in nested folders also
-- **git commit -m "Some message text"** - will move files from staging are to the local repository, where we can proceed with pushing to the remote repository. -m stands for the message we want to provide
+- **git commit -m "Some message text"** - will move files from staging area to the local repository, where we can proceed with pushing to the remote repository. -m stands for the message we want to provide
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
 - **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
 - **git log** - will display the history of the commits
