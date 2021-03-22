@@ -325,7 +325,7 @@
       </div>
       <div class="info">
         <ul>
-          <li>We can use functions to transform the outpu.</li>
+          <li>We can use functions to transform the output.</li>
         </ul>
       </div>
       <div class="source-table">
@@ -373,6 +373,254 @@
             </tr>
             <tr>
               <td>Iva lives in PLOVDIV.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Filter results</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This is how we can filter results.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name, city <b>FROM</b> people
+<b>WHERE</b> monthly_income >= 7000 <b>AND</b> city = 'Plovdiv';
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Between value or in array of values</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This is how we can filter results.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name, city <b>FROM</b> people
+<b>WHERE</b> monthly_income <b>BETWEEN</b> 5000 <b>AND</b> 7000 <b>AND</b> city <b>IN</b> ('Sofia', 'Varna');
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Update value</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>We can update all values or some, based on condition.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>UPDATE</b> people <b>SET</b> monthly_income = 6900 <b>WHERE</b> name = 'Mira' <b>OR</b> city = 'Sofia';
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>6900</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Delete row/rows</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>We can delete all rows or some, based on condition.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>DELETE FROM</b> people <b>WHERE</b> name = 'Mira';
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
             </tr>
           </tbody>
         </table>
