@@ -34,8 +34,11 @@
       }
       th,
       td {
-        border: 1px solid #123457;
+        border: 1px solid #723457;
         padding: 2px;
+      }
+      sup {
+        color: #454545;
       }
     </style>
     <meta charset="UTF-8" />
@@ -58,6 +61,7 @@
       <div class="query">
         <pre>
 <b>CREATE TABLE</b> people (
+  id <b>SERIAL PRIMARY KEY</b>,
   name <b>VARCHAR</b>(20),
   city <b>VARCHAR</b>(20),
   monthly_income <b>DECIMAL</b>,
@@ -68,10 +72,41 @@
         <table>
           <thead>
             <tr>
+              <th>id<sup>PK</sup></th>
               <th>name</th>
               <th>city</th>
               <th>monthly_income</th>
               <th>travel_spendings</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Create new table</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This query will create new table using foreign key.</li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>CREATE TABLE</b> pets (
+  id <b>SERIAL PRIMARY KEY</b>,
+  pet <b>VARCHAR</b>(20),
+  person_id <b>INTEGER REFERENCES</b> people(id)
+);</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>pet</th>
+              <th>person_id<sup>FK</sup></th>
             </tr>
           </thead>
         </table>
@@ -86,6 +121,7 @@
         <ul>
           <li>Note that values are in single quotes.</li>
           <li>Provided values order should match the expected values.</li>
+          <li>Here we assume, that Primary key was set.</li>
         </ul>
       </div>
       <div class="query">
@@ -98,6 +134,7 @@
         <table>
           <thead>
             <tr>
+              <th>id<sup>PK</sup></th>
               <th>name</th>
               <th>city</th>
               <th>monthly_income</th>
@@ -106,12 +143,14 @@
           </thead>
           <tbody>
             <tr>
+              <td>1</td>
               <td>Mira</td>
               <td>Sofia</td>
               <td>5800</td>
               <td>2200.50</td>
             </tr>
             <tr>
+              <td>2</td>
               <td>Iva</td>
               <td>Plovdiv</td>
               <td>7200</td>
