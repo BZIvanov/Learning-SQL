@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      * {
+        font-family: sans-serif;
+      }
+      body {
+        font-size: 14px;
+      }
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+      section {
+        margin: 15px 0;
+        padding: 5px;
+        box-shadow: 0 0 5px #d48dd4;
+        border-radius: 3px;
+      }
+      section > div {
+        margin: 5px 0;
+      }
+      .query {
+        background-color: #dbdccf;
+        padding: 7px 5px;
+      }
+      .query pre {
+        margin: 0;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #123457;
+        padding: 2px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Postgresql</title>
+  </head>
+  <body>
+    <section>
+      <div class="title">
+        <h3>Create new table</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            This query will create new table called people in our database.
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>CREATE TABLE</b> people (
+  name <b>VARCHAR</b>(20),
+  city <b>VARCHAR</b>(20),
+  monthly_income <b>DECIMAL</b>,
+  travel_spendings <b>DECIMAL</b>
+);</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Insert data into a table</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>Note that values are in single quotes.</li>
+          <li>Provided values order should match the expected values.</li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>INSERT INTO</b> people(name, city, monthly_income, travel_spendings)
+<b>VALUES</b> ('Mira', 'Sofia', 5800, 2200.50), ('Iva', 'Plovdiv', 7200, 1900);
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200.50</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Read data</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This way we will read all the table's data.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200.50</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> * <b>FROM</b> people;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200.50</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Read partial data</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This way we will read only specific columns.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200.50</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name, city <b>FROM</b> people;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Read and transform data</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>We can use math operators with different columns values.</li>
+          <li>With AS we can get meaningful column names.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name, monthly_income - travel_spendings <b>AS</b> net, travel_spendings / monthly_income * 100 <b>AS</b> perc
+<b>FROM</b> people;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>net</th>
+              <th>perc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>3599.50</td>
+              <td>37.93965517241379310300</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>5300</td>
+              <td>26.38888888888888888900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Use functions</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>We can use functions to transform the outpu.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>monthly_income</th>
+              <th>travel_spendings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5800</td>
+              <td>2200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>7200</td>
+              <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT CONCAT</b> (name, ' lives in ', UPPER(city), '.') <b>AS</b> sentence
+<b>FROM</b> people;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>sentence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira lives in SOFIA.</td>
+            </tr>
+            <tr>
+              <td>Iva lives in PLOVDIV.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>
