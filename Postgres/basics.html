@@ -14,9 +14,9 @@
         margin: 0;
       }
       section {
-        margin: 15px 0;
+        margin: 20px 0;
         padding: 5px;
-        box-shadow: 0 0 5px #d48dd4;
+        box-shadow: 0 0 9px #d48dd4;
         border-radius: 3px;
       }
       section > div {
@@ -39,6 +39,15 @@
       }
       sup {
         color: #454545;
+      }
+      th[colspan] {
+        color: #723457;
+      }
+      .source-table {
+        display: flex;
+      }
+      .source-table table {
+        margin-right: 7px;
       }
     </style>
     <meta charset="UTF-8" />
@@ -660,6 +669,147 @@
               <td>Plovdiv</td>
               <td>7200</td>
               <td>1900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Joining tables</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>Inner join will return result which are match in both tables.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">users</th>
+            </tr>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mira</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sofia</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Ivan</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Metodi</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Marina</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th colspan="3">images</th>
+            </tr>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>url</th>
+              <th>user_id<sup>FK</sup></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>image-1.png</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>image-2.png</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>image-3.png</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>image-4.png</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>image-3.png</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> u.id <b>AS</b> uid, name, i.id <b>AS</b> iid, url, user_id
+<b>FROM</b> users <b>AS</b> u <b>INNER JOIN</b> images <b>AS</b> i <b>ON</b> u.id = i.user_id;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>uid</th>
+              <th>name</th>
+              <th>iid</th>
+              <th>url</th>
+              <th>user_id</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mira</td>
+              <td>1</td>
+              <td>image-1.png</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Mira</td>
+              <td>2</td>
+              <td>image-2.png</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sofia</td>
+              <td>3</td>
+              <td>image-3.png</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sofia</td>
+              <td>4</td>
+              <td>image-4.png</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Ivan</td>
+              <td>5</td>
+              <td>image-5.png</td>
+              <td>3</td>
             </tr>
           </tbody>
         </table>
