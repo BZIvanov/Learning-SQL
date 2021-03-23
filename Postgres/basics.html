@@ -99,6 +99,11 @@
       <div class="info">
         <ul>
           <li>This query will create new table using foreign key.</li>
+          <li>
+            With cascade delete if in table people user with the same id as the
+            foreign key is deleted, the record in this table will be also
+            deleted.
+          </li>
         </ul>
       </div>
       <div class="query">
@@ -106,7 +111,7 @@
 <b>CREATE TABLE</b> pets (
   id <b>SERIAL PRIMARY KEY</b>,
   pet <b>VARCHAR</b>(20),
-  person_id <b>INTEGER REFERENCES</b> people(id)
+  person_id <b>INTEGER REFERENCES</b> people(id) <b>ON DELETE CASCADE</b>
 );</pre>
       </div>
       <div class="result-table">
@@ -119,6 +124,22 @@
             </tr>
           </thead>
         </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Delete table</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>This query will delete specific table.</li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>DROP TABLE</b> people;
+</pre>
       </div>
     </section>
 
