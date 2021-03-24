@@ -390,6 +390,62 @@
 
     <section>
       <div class="title">
+        <h3>Sum values</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            Sum is aggregate function which will combine all rows in a sum.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>3500</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>3700</td>
+            </tr>
+            <tr>
+              <td>Mitko</td>
+              <td>3900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> <b>sum</b>(income) <b>AS</b> total <b>FROM</b> people;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>11100</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
         <h3>Use functions</h3>
       </div>
       <div class="info">
@@ -1135,6 +1191,92 @@
               <td>2</td>
               <td>2</td>
               <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Grouping data</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            Group by is creating multiple subtables based on what we group by
+            and executing aggregate functions on those subtables.
+          </li>
+          <li>
+            After the select we can only have columns which appear after group
+            by or aggreagte functions
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Mitko</td>
+              <td>Sofia</td>
+              <td>4000</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>3800</td>
+            </tr>
+            <tr>
+              <td>Toni</td>
+              <td>Plovdiv</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>Polina</td>
+              <td>Varna</td>
+              <td>4500</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> city, <b>avg</b>(income) <b>AS</b> average_income <b>FROM</b> people
+<b>GROUP BY</b> city;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>city</th>
+              <th>average_income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sofia</td>
+              <td>4600.00000</td>
+            </tr>
+            <tr>
+              <td>Varna</td>
+              <td>4500.00000</td>
+            </tr>
+            <tr>
+              <td>Plovdiv</td>
+              <td>4400.00000</td>
             </tr>
           </tbody>
         </table>
