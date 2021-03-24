@@ -1282,5 +1282,85 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Grouping data with having</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            WHERE will filter first some of the rows, then GROU BY will create
+            subgroups and HAVING will filter the subgroups.
+          </li>
+          <li>
+            Based on the above text, WHERE is filtering based on individual rows
+            and HAVING on whole groups.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Angelina</td>
+              <td>Sofia</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>Plovdiv</td>
+              <td>4250</td>
+            </tr>
+            <tr>
+              <td>Traqn</td>
+              <td>Plovdiv</td>
+              <td>4900</td>
+            </tr>
+            <tr>
+              <td>Eli</td>
+              <td>Varna</td>
+              <td>4990</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> city, <b>avg</b>(income) <b>AS</b> average_income <b>FROM</b> people
+<b>WHERE</b> income &lt;= 5000
+<b>GROUP BY</b> city
+<b>HAVING</b> <b>COUNT</b>(*) &gt; 1;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>city</th>
+              <th>average_income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Plovdiv</td>
+              <td>4575.00000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
