@@ -1479,5 +1479,83 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Skip and limit results</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>Useful for example for pagination.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Angelina</td>
+              <td>Sofia</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>Plovdiv</td>
+              <td>4250</td>
+            </tr>
+            <tr>
+              <td>Traqn</td>
+              <td>Plovdiv</td>
+              <td>4900</td>
+            </tr>
+            <tr>
+              <td>Eli</td>
+              <td>Varna</td>
+              <td>4990</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> * <b>FROM</b> people
+<b>ORDER BY</b> income <b>LIMIT</b> 2 <b>OFFSET</b> 2;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Eli</td>
+              <td>Varna</td>
+              <td>4990</td>
+            </tr>
+            <tr>
+              <td>Angelina</td>
+              <td>Sofia</td>
+              <td>5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
