@@ -1661,5 +1661,71 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Sub queries</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            With sub queries we can use the result of one query in another.
+          </li>
+          <li>
+            Very <b>important</b> note here is to understand the returned type of the
+            subquery. It is not table with one or many columns and rows. It is
+            scalar type, single value which we can reuse. Basically, because the
+            result is one column and one row.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Angelina</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>4250</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> * <b>FROM</b> people <b>WHERE</b> income &gt; (
+  <b>SELECT</b> income <b>FROM</b> people <b>WHERE</b> name = 'Angelina'
+);
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
