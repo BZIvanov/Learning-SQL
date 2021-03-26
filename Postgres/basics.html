@@ -1557,5 +1557,109 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Union reesults</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>Useful for combining the result of different queries.</li>
+          <li>Both queries must produce similar column structure.</li>
+          <li>
+            Without union all, just union we would get 3 results, because
+            duplicates are ignored.
+          </li>
+          <li>
+            if we use <b>INTERSECT</b> instead of <b>UNION</b> we would get only
+            common results for both queries.
+          </li>
+          <li>
+            if we use <b>EXCEPT</b> instead of <b>UNION</b> we would get the
+            results from the first query except the results returned from the
+            second query. Basically everything present in the first query except
+            the second.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+              <th>taxes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Angelina</td>
+              <td>5000</td>
+              <td>350.50</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+              <td>220</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>4250</td>
+              <td>160</td>
+            </tr>
+            <tr>
+              <td>Traqn</td>
+              <td>4900</td>
+              <td>190</td>
+            </tr>
+            <tr>
+              <td>Eli</td>
+              <td>4990</td>
+              <td>90</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+(<b>SELECT</b> * <b>FROM</b> people <b>ORDER BY</b> income <b>DESC LIMIT</b> 2)
+<b>UNION ALL</b>
+(<b>SELECT</b> * <b>FROM</b> people <b>ORDER BY</b> income - taxes <b>DESC LIMIT</b> 2);
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+              <th>taxes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+              <td>220</td>
+            </tr>
+            <tr>
+              <td>Angelina</td>
+              <td>5000</td>
+              <td>350.50</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+              <td>220</td>
+            </tr>
+            <tr>
+              <td>Eli</td>
+              <td>4990</td>
+              <td>90</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
