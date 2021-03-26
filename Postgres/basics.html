@@ -1672,10 +1672,10 @@
             With sub queries we can use the result of one query in another.
           </li>
           <li>
-            Very <b>important</b> note here is to understand the returned type of the
-            subquery. It is not table with one or many columns and rows. It is
-            scalar type, single value which we can reuse. Basically, because the
-            result is one column and one row.
+            Very <b>important</b> note here is to understand the returned type
+            of the subquery. It is not table with one or many columns and rows.
+            It is scalar type, single value which we can reuse. Basically,
+            because the result is one column and one row.
           </li>
         </ul>
       </div>
@@ -1722,6 +1722,78 @@
             <tr>
               <td>Valeria</td>
               <td>5200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Sub queries with selecting columns</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            For our custom column we will have value calculated with the scalar
+            result returned by the subquery.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Angelina</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>4250</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name, income, income / (<b>SELECT</b> <b>max</b>(income) <b>FROM</b> people) <b>AS</b> ratio
+<b>FROM</b> people <b>ORDER BY</b> income <b>DESC</b>;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>income</th>
+              <th>ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Valeria</td>
+              <td>5200</td>
+              <td>1.00000000000000000000</td>
+            </tr>
+            <tr>
+              <td>Angelina</td>
+              <td>5000</td>
+              <td>0.96153846153846153846</td>
+            </tr>
+            <tr>
+              <td>Evgeni</td>
+              <td>4250</td>
+              <td>0.81730769230769230769</td>
             </tr>
           </tbody>
         </table>
