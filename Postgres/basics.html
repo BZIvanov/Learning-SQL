@@ -1730,7 +1730,7 @@
 
     <section>
       <div class="title">
-        <h3>Sub queries with selecting columns</h3>
+        <h3>Sub queries in the select clause.</h3>
       </div>
       <div class="info">
         <ul>
@@ -1794,6 +1794,81 @@
               <td>Evgeni</td>
               <td>4250</td>
               <td>0.81730769230769230769</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Sub queries in the from clause.</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>We are required to use alias AS c even if we don't use it.</li>
+          <li>
+            Outside the subquery, we can only use columns from the subquery.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>4500</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>5100</td>
+            </tr>
+            <tr>
+              <td>Tina</td>
+              <td>Plovdiv</td>
+              <td>4750</td>
+            </tr>
+            <tr>
+              <td>Ivan</td>
+              <td>Sofia</td>
+              <td>5500</td>
+            </tr>
+            <tr>
+              <td>Deni</td>
+              <td>Sofia</td>
+              <td>4900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> <b>avg</b>(cities_count)
+<b>FROM</b> (
+  <b>SELECT</b> city, <b>COUNT</b>(*) <b>AS</b> cities_count
+  <b>FROM</b> people <b>GROUP BY</b> city
+) <b>AS</b> c;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2.5000000000000000</td>
             </tr>
           </tbody>
         </table>
