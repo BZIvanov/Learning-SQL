@@ -12,3 +12,5 @@ Work in a bash terminal, because the normal one doesn't support all commands lik
 - **clear** - will clear the text on the console
 - **cat ~/myfile.txt** - it allows us to expect the content of a file without opening it. The second parameter is the path to the file.
 - **rm -rf folder-name** - will remove the specified folder and all of it's content
+- **touch index.js** - will create js file
+- **rm index.js** - will remove the specified file
