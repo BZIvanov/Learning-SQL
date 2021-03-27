@@ -2129,5 +2129,91 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Another subquery example.</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            With ALL we will select onlyy users which have income higher than
+            anyone from Plovdiv.
+          </li>
+          <li>
+            With similar syntax with using SOME we can also achieve filtering
+            behaviour.
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>5100</td>
+            </tr>
+            <tr>
+              <td>Tanq</td>
+              <td>Sofia</td>
+              <td>5500</td>
+            </tr>
+            <tr>
+              <td>Misho</td>
+              <td>Sofia</td>
+              <td>4900</td>
+            </tr>
+            <tr>
+              <td>Zaro</td>
+              <td>Plovdiv</td>
+              <td>5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> * <b>FROM</b> users <b>WHERE</b> income &gt; <b>ALL</b> (
+  <b>SELECT</b> income <b>FROM</b> users <b>WHERE</b> city = 'Plovdiv'
+);
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Tanq</td>
+              <td>Sofia</td>
+              <td>5500</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
