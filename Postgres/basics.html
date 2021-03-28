@@ -2272,5 +2272,97 @@
         </table>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Switch case</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>With Case we can get conditional value.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>city</th>
+              <th>income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>Sofia</td>
+              <td>5200</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>Plovdiv</td>
+              <td>5100</td>
+            </tr>
+            <tr>
+              <td>Tanq</td>
+              <td>Sofia</td>
+              <td>5500</td>
+            </tr>
+            <tr>
+              <td>Misho</td>
+              <td>Sofia</td>
+              <td>4900</td>
+            </tr>
+            <tr>
+              <td>Zaro</td>
+              <td>Plovdiv</td>
+              <td>5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>SELECT</b> name,
+  <b>CASE</b>
+    <b>WHEN</b> income &lt; 5000 <b>THEN</b> 'low'
+    <b>WHEN</b> income &lt; 5500 <b>THEN</b> 'average'
+    <b>ELSE</b> 'high'
+  <b>END AS</b> formatted_income
+<b>FROM</b> users;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>formatted_income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mira</td>
+              <td>average</td>
+            </tr>
+            <tr>
+              <td>Iva</td>
+              <td>average</td>
+            </tr>
+            <tr>
+              <td>Tanq</td>
+              <td>high</td>
+            </tr>
+            <tr>
+              <td>Misho</td>
+              <td>low</td>
+            </tr>
+            <tr>
+              <td>Zaro</td>
+              <td>average</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
