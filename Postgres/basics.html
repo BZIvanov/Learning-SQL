@@ -68,6 +68,15 @@
           <li>
             Serial is similar to integer, but starting from positive value.
           </li>
+          <li>
+            With Default we can specify default value if it is not provided,
+            when creating a record.
+          </li>
+          <li>
+            With Check for we can add validation for required value before
+            insert. As you can see below we can add check for specific column or
+            between columns.
+          </li>
         </ul>
       </div>
       <div class="query">
@@ -75,9 +84,10 @@
 <b>CREATE TABLE</b> people (
   id <b>SERIAL PRIMARY KEY</b>,
   name <b>VARCHAR</b>(20) NOT NULL,
-  city <b>VARCHAR</b>(20),
-  monthly_income <b>DECIMAL</b>,
-  travel_spendings <b>DECIMAL</b>
+  city <b>VARCHAR</b>(20) <b>DEFAULT</b> 'Sofia',
+  monthly_income <b>DECIMAL</b> <b>CHECK</b> (monthly_income > 0),
+  travel_spendings <b>DECIMAL</b>,
+  <b>CHECK</b> (monthly_income &gt; travel_spendings)
 );</pre>
       </div>
       <div class="result-table">
@@ -155,6 +165,7 @@
           <li>
             We can modify the columns settings of already exisiting tables.
           </li>
+          <li>Similarly we can add Unique or Check constraints.</li>
         </ul>
       </div>
       <div class="query">
