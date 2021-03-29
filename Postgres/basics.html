@@ -65,13 +65,16 @@
           <li>
             This query will create new table called people in our database.
           </li>
+          <li>
+            Serial is similar to integer, but starting from positive value.
+          </li>
         </ul>
       </div>
       <div class="query">
         <pre>
 <b>CREATE TABLE</b> people (
   id <b>SERIAL PRIMARY KEY</b>,
-  name <b>VARCHAR</b>(20),
+  name <b>VARCHAR</b>(20) NOT NULL,
   city <b>VARCHAR</b>(20),
   monthly_income <b>DECIMAL</b>,
   travel_spendings <b>DECIMAL</b>
@@ -94,7 +97,7 @@
 
     <section>
       <div class="title">
-        <h3>Create new table</h3>
+        <h3>Create new table with foreign key</h3>
       </div>
       <div class="info">
         <ul>
@@ -140,6 +143,35 @@
         <pre>
 <b>DROP TABLE</b> people;
 </pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Modify column of existing table</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            We can modify the columns settings of already exisiting tables.
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>ALTER TABLE</b> people 
+<b>ALTER COLUMN</b> name <b>SET NOT NULL</b>;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>name</th>
+            </tr>
+          </thead>
+        </table>
       </div>
     </section>
 
