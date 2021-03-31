@@ -153,6 +153,10 @@
           <li>
             So in this case we require at least email or phone to be provided.
           </li>
+          <li>
+            For the second check we will cast the id to boolean and then the
+            boolean to integer, so we will end up with 0 or 1 for each coalesce.
+          </li>
         </ul>
       </div>
       <div class="query">
@@ -161,7 +165,15 @@
   id <b>SERIAL PRIMARY KEY</b>,
   email <b>VARCHAR</b>(20),
   phone <b>VARCHAR</b>(20),
-  <b>CHECK</b> (<b>COALESCE</b>(email, phone) <b>IS NOT NULL</b>)
+  contact_book_id <b>INTEGER REFERENCES</b> contact_book(id) <b>ON DELETE CASCADE</b>,
+  private_book_id <b>INTEGER REFERENCES</b> private_book(id) <b>ON DELETE CASCADE</b>,
+  <b>CHECK</b> (<b>COALESCE</b>(email, phone) <b>IS NOT NULL</b>),
+  <b>CHECK</b> (
+    <b>COALESCE</b>((contact_book_id)<b>::BOOLEAN::INTEGER</b>, 0)
+    +
+    <b>COALESCE</b>((private_book_id)<b>::BOOLEAN::INTEGER</b>, 0)
+    = 1
+  )
 );</pre>
       </div>
       <div class="result-table">
@@ -171,6 +183,8 @@
               <th>id<sup>PK</sup></th>
               <th>email</th>
               <th>phone</th>
+              <th>contact_book_id<sup>FK</sup></th>
+              <th>private_book_id<sup>FK</sup></th>
             </tr>
           </thead>
         </table>
