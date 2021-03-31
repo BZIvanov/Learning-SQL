@@ -142,6 +142,43 @@
 
     <section>
       <div class="title">
+        <h3>Create new table with multi column null check</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            Coalesce will return the first not null value, if all values are
+            null it will return null
+          </li>
+          <li>
+            So in this case we require at least email or phone to be provided.
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>CREATE TABLE</b> contact (
+  id <b>SERIAL PRIMARY KEY</b>,
+  email <b>VARCHAR</b>(20),
+  phone <b>VARCHAR</b>(20),
+  <b>CHECK</b> (<b>COALESCE</b>(email, phone) <b>IS NOT NULL</b>)
+);</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>email</th>
+              <th>phone</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
         <h3>Delete table</h3>
       </div>
       <div class="info">
