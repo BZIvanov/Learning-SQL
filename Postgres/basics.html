@@ -209,6 +209,48 @@
 
     <section>
       <div class="title">
+        <h3>Create index</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            Index is useful for search optimizations, especially, when operating
+            on the entire tables
+          </li>
+          <li>
+            But there is also downsides. It increase the size of the disk space
+            we need. And is slowing operations like insert, update and delete.
+          </li>
+          <li>
+            The convention for naming indexes is first that table name, column
+            name, idx
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <pre>
+<b>CREATE TABLE</b> users ( 
+  id <b>SERIAL PRIMARY KEY</b>,
+  name <b>VARCHAR</b>(20)
+);
+
+<b>CREATE INDEX</b> users_name_idx <b>ON</b> users(name);
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id<sup>PK</sup></th>
+              <th>name</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
         <h3>Modify column of existing table</h3>
       </div>
       <div class="info">
@@ -2456,6 +2498,50 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Insights</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            With the following query we can get info of how our query was
+            processed.
+          </li>
+          <li>For example we can see the execution time of our query.</li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Eli</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Mira</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Toni</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>EXPLAIN ANALYZE SELECT</b> * <b>FROM</b> users <b>WHERE</b> name = 'Eli';
+</pre>
       </div>
     </section>
   </body>
