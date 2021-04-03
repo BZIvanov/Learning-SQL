@@ -2737,5 +2737,90 @@
 </pre>
       </div>
     </section>
+
+    <section>
+      <div class="title">
+        <h3>Transaction</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            Transaction are usefull for operations requiring multiple queries
+            depending on each other. If one of the queries for example fail we
+            might want to cancel all the other queries.
+          </li>
+          <li>
+            BEGIN will begin the transaction duplicating imaginary database on
+            which we can run commands and the changes will be applied once we
+            commit them.
+          </li>
+          <li>
+            In pgAdmin if you open 2 query windows and running transaction on
+            the first window, in the 2nd window you will see the changes applied
+            once commited.
+          </li>
+          <li>
+            Because the point of transactions is to remove the effect of the
+            queries in case of error, we do that with the key word ROLLBACK. It
+            will revert all the queries in the transaction(remove our imaginary
+            database).
+          </li>
+        </ul>
+      </div>
+      <div class="source-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Eli</td>
+              <td>200</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Iva</td>
+              <td>100</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="query">
+        <pre>
+<b>BEGIN</b>;
+<b>UPDATE</b> people <b>SET</b> amount = amount - 50 <b>WHERE</b> name = 'Eli';
+<b>UPDATE</b> people <b>SET</b> amount = amount + 50 <b>WHERE</b> name = 'Iva';
+<b>COMMIT</b>;
+</pre>
+      </div>
+      <div class="result-table">
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Eli</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Iva</td>
+              <td>150</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </body>
 </html>
