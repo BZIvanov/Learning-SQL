@@ -24,10 +24,46 @@ docker run -p 3000:3000 biserivanov/myapp
 
 On this step we need to map the port of our computer to a port inside of the container. In our case, when we access port 3000 on the computer it will be redirected to port 3000 in the container and our app is listening on that port. The -p flag is for ports usage.
 
+---
+
+ALTERNATIVELY YOU CAN USE:
+
+If you get permission denied, when testing locally, try with this approach:
+
+1. First build the image. Use the command in the directory, where is the Dockerfile
+
+```
+docker build .
+```
+
+2. Run the image:
+
+```
+docker run -p 3000:3000 .
+```
+
 ## Debugging
 
 For debugging you can use the below command, which will open a terminal inside of the container.
 
 ```
 docker exec -it biserivanov/myapp sh
+```
+
+---
+
+ALTERNATIVELY
+
+Use the below steps:
+
+1. Check running containers ids:
+
+```
+docker ps
+```
+
+2. Get the id for the container and run:
+
+```
+docker exec -it container-id-here sh
 ```
