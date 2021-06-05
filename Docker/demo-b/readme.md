@@ -8,8 +8,10 @@ Docker compose will put our containers in the same network, so they can easy com
 
 ## Usage
 
-While in the same directory, run the below command to build the container
+While in the same directory, run the below command
 
 ```
-docker build .
+docker-compose up
 ```
+
+Open the browser on _http://localhost:3000/_ and you will see the count of 0. Refresh the browser and the value will increment.
