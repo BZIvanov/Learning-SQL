@@ -2,7 +2,10 @@ const express = require('express');
 const redis = require('redis');
 
 const app = express();
-const client = redis.createClient();
+const client = redis.createClient({
+  host: 'my-redis-server', // this is the name of our redis container
+  port: 6379, // this is the default redis port number
+});
 
 // set initial value
 client.set('count', 0);
