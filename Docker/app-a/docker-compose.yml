@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_PASSWORD: postgres_password
+  redis:
+    image: 'redis:latest'
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/app/node_modules
+      - './server:/usr/app'
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PG_USER=postgres
+      - PG_HOST=postgres
+      - PG_PORT=5432
+      - PG_DATABASE=postgres
+      - PG_PASSWORD=postgres_password
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/app/node_modules
+      - './client:/usr/app'
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/app/node_modules
+      - './worker:/usr/app'

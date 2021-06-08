@@ -8,12 +8,12 @@ const App = () => {
 
   useEffect(() => {
     const fetchUsedPrices = async () => {
-      const response = await axios.get('/prices/all');
+      const response = await axios.get('/api/prices/all');
       setUsedPrices(response.data);
     };
 
     const fetchVats = async () => {
-      const response = await axios.get('/prices/current');
+      const response = await axios.get('/api/prices/current');
       setVats(response.data);
     };
 
@@ -24,7 +24,7 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post('/prices', { price });
+    await axios.post('/api/prices', { price });
     setPrice('');
   };
 
