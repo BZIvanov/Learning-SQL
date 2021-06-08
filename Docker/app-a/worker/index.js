@@ -14,7 +14,7 @@ function calculateVAT(value) {
 }
 
 sub.on('message', (channel, message) => {
-  redisClient.hset('values', message, calculateVAT(parseInt(message, 10)));
+  redisClient.hset('prices', message, calculateVAT(parseInt(message, 10)));
 });
 
 sub.subscribe('insert');
