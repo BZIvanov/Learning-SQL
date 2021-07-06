@@ -97,20 +97,26 @@ SELECT * FROM customers
 JOIN orders ON customers.id = orders.customer_id;
 ```
 
-### Left join
+### Outer join
 
-With left join we will get everything from the left table even if we don't have a match.
+#### Left outer join (left join)
+
+With left join we will get everything from the left table even if we don't have a match from the right table. In other words left outer join returns all the rows from the left table with the matching rows from the right table and if there are no columns matching in the right table it return NULL values.
 
 ```sql
 SELECT * FROM customers
 LEFT JOIN orders ON customers.id = orders.customer_id;
 ```
 
-### Right join
+#### Right outer join (right join)
 
-With right join we will get everything from the right table even if we don't have a match.
+With right join we will get everything from the right table even if we don't have a match from the left table. Basically it is reversed on the left join.
 
 ```sql
 SELECT * FROM customers
 RIGHT JOIN orders ON customers.id = orders.customer_id;
 ```
+
+#### Full outer join
+
+Full outer join is not supported by MySQL, but we can achieve it by using left join and right join with union.
