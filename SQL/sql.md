@@ -111,6 +111,7 @@ SHOW warnings;
 Primary key is a column of unique values to make all rows unique.
 In the primary key we provide as argument which column we want to be the primary key.
 If we have Auto increment added, we don't need to provide an id every time we add new row to the table.
+Primary key column can not be NULL. We can have more than one column in a table which is primary key, this is called composite columns.
 
 ```sql
 CREATE TABLE students (
