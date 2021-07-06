@@ -1,9 +1,9 @@
 Produce the following result table:
 
-| fullName       | doubledIncome |
-| -------------- | ------------- |
-| Iva Ivanova    | 7740.24       |
-| Simona Ivanova | 5700.00       |
-| Petar Petrov   | 9545.98       |
+| fullName   | income  | doubledIncome |
+| ---------- | ------- | ------------- |
+| I. Ivanova | 3870.12 | 7740.24       |
+| S. Ivanova | 2850.00 | 5700.00       |
+| P. Petrov  | 4772.99 | 9545.98       |
 
 _Use the setup.sql file to create the table._
