@@ -78,3 +78,43 @@ CALL InsertFruit('cherry');
 
 SELECT * FROM fruit;
 ```
+
+### Triggers
+
+Triggers are executed automatically, when DML operation like insert, update or delete is executed.
+
+#### demo - create trigger, when inserting data
+
+1. Setup the database and table.
+
+```sql
+CREATE DATABASE food;
+USE food;
+CREATE TABLE fruit (
+    name VARCHAR(20)
+);
+INSERT INTO fruit (name) VALUES ('Apple'), ('Orange'), ('Plum');
+```
+
+2. Now we will create our trigger. What this trigger does is to change the first letter to be capital and rest of the letters to be lower case.
+
+```sql
+-- change the default ';' delimiter to '//'
+DELIMITER //
+CREATE TRIGGER Correct_Before_Insert
+BEFORE INSERT ON fruit
+FOR EACH ROW
+BEGIN
+	SET NEW.name = concat(upper(substring(NEW.name, 1, 1)), lower(substring(NEW.name FROM 2)));
+END //
+-- set again delimiter to be ';'
+DELIMITER ;
+```
+
+3. Now after we insert some incorrect case data we expect to be corrected.
+
+```sql
+INSERT INTO fruit(name) VALUES ('cheRRy'), ('mANgO');
+
+SELECT * FROM fruit;
+```
