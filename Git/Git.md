@@ -12,7 +12,7 @@ We can save long inputs or common commands as aliases. If we have aliases we can
 
 ## Git workflow
 
-_Working directory **->** Staging area **->** Local Repository (.git folder) **<->** Remote repository_
+_Working directory_ or _Working area_ **->** _Staging area_ or _Index_ **->** _Local Repository (.git folder)_ or just _Repository_ **<->** _Remote repository_
 
 1. Files we have made changes on are initially in working directory. With the add command we can put them in the Staging area.
 2. Files added in Staging area can be moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the **add** command.
@@ -38,9 +38,9 @@ _Working directory **->** Staging area **->** Local Repository (.git folder) **<
 
 - **git clone git@github.com:BZIvanov/Learning-SQL-and-Git.git** - will clone remote repository, if we don't have it locally. The url is example, you can find it in GitHub. Note that this is not simple url, because this is example with using SSH key. Check how to set your SSH key if you don't have one.
 - **git status** - will display the currently selected branch and the state of the repository, for example if it is up do date or commits are pending. Very often used operation to check what we need
-- **git add file.txt** - will put the specified file in the staging area, where the file is ready to be commited
+- **git add file.txt** - will move the specified file from the _Working area_ to the _Staging area_, where the file is ready to be commited
 - **git add .** - similar to the above command, but will be applied on all files, not just the one specified. This command will add files recursively, meaning files in nested folders also
-- **git commit -m "Some message text"** - will move files from staging area to the local repository, where we can proceed with pushing to the remote repository. -m stands for the message we want to provide
+- **git commit -m "Some message text"** - will move files from _Staging area_ to the _Local repository_, where we can proceed with pushing to the _Remote repository_. -m stands for the message we want to provide
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
 - **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
 - **git log** - will display the history of the commits
@@ -52,6 +52,8 @@ _Working directory **->** Staging area **->** Local Repository (.git folder) **<
 - **git checkout -b somename** - will do both operations of creating a new branch and selecting it
 - **git branch -m prevname newname** - will rename a branch
 - **git branch -d somename** - will delete a branch. We have to select other branch before that, because we can not delete the currently used branch
+- **git diff** - without any arguments will display differences between the _Working Area_ and _Index_
+- **git diff --cached** - will display differences between the _Index_ and _Local repository_
 - **git diff master somebranch** - will display differences between two branches. We can also compare with the remote repository in this way _git diff master origin/master_ which will compare the master branch on the local and remote repository
 
 - **git merge somebranch** - will merge the currently selected branch with the specified in the command branch. This will do the so call fast forward merge, which require not to have commits on the current branch
@@ -86,6 +88,8 @@ _Working directory **->** Staging area **->** Local Repository (.git folder) **<
 - **git push origin master --tags** - will push to the remote repository all of our tags
 
 - **git fetch origin master** - it will update the references between remote and local repository
+
+- **git rm --cached file.txt** - if we have a file which is in _Working Area_ and _Index_, but not in the _Local repository_ this command will remove it from the _Index_ and we will only have it in the _Working area_. In other words the file will be unstaged.
 
 ### Tips
 
