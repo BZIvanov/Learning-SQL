@@ -18,6 +18,8 @@ _Working directory_ or _Working area_ **->** _Staging area_ or _Index_ **->** _L
 2. Files added in Staging area can be moved to the local repositoy by the commit command. Only files that have been added to the staging area can be commited to the local repository. All other changed files after that have to be added first to the staging area with the **add** command.
 3. With push command files from the local repository are updated in the remote repository.
 
+Note: There is one more place except the above 4 and that is the _Stash_. There we have our stashed items.
+
 ---
 
 ## Commands
@@ -65,6 +67,7 @@ _Working directory_ or _Working area_ **->** _Staging area_ or _Index_ **->** _L
 
 - **git reset --soft HEAD~1** - will reset the last commit and will keep the changes on the working tree.
 - **git reset HEAD file.txt** - will remove the file from the Staging area, after we have added it there and the file will go back to working directory.
+- **git reset --hard af3517** - will reset the commits back to the commit with id starting with af3517. The hard option will also replace the _Working area_ and the _Index_ to be the same as the targeted commit state
 - **git checkout -- file.txt** - will undo the changes made inside the file, and the file will get back in the state where it was after the last commit
 - **git checkout HEAD^** - by selecting specific commit we detached the HEAD from the branch. And by using the ^ symbol we will select the first level ancestor of the HEAD, HEAD is now the currently selected commit
 - **git branch -f master HEAD~3** - will force the master branch to go back with 3 levels up in the tree
@@ -77,6 +80,7 @@ _Working directory_ or _Working area_ **->** _Staging area_ or _Index_ **->** _L
 - **git stash list** - will list a list with all the stashes we have/made
 - **git stash drop** - will remove the last stash we have. This is good to be done if we have already commited changes from the stash and we don't need the stash anymore
 - **git stash show stash@{1}** - if we have more than 1 stashes we can inspect the content of one of our stashes by providing its index. We can use this kind of indexing for also other commands like drop and apply
+- **git stash clear** - will clear the entire stash
 
 - **git tag myTag** - this way we create the so called lightweight tag. Tags are just pointers to specific commits. Tags are created for the last commit on the current branch
 - **git tag -a v-1.0 -m "Some message"** - this way we create the so called annotated tag. It is common practice to name them as versions. Annotated tags contain more information.
