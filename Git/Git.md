@@ -45,6 +45,7 @@ Note: There is one more place except the above 4 and that is the _Stash_. There 
 - **git commit -m "Some message text"** - will move files from _Staging area_ to the _Local repository_, where we can proceed with pushing to the _Remote repository_. -m stands for the message we want to provide
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
 - **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
+- **git push origin --delete remote-branch-name-here** - will delete a branch on the remote repository
 - **git log** - will display the history of the commits
 - **git log -- myfile.txt** - will log the commits, which involve only the specific file we want to check
 
