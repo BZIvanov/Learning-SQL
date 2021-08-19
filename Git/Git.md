@@ -93,6 +93,7 @@ Note: There is one more place except the above 4 and that is the _Stash_. There 
 - **git push origin master --tags** - will push to the remote repository all of our tags
 
 - **git fetch origin master** - it will update the references between remote and local repository
+- **git fetch origin some-branch-name:some-branch-name** - it will fetch/create local branch based on a remote branch. The branch before the colon ':' is the name of the remote branch. The branch after the colon ':' is the local branch that is going to be created. The new local branch will have the same ref as the remote branch.
 
 - **git rm --cached file.txt** - if we have a file which is in _Working Area_ and _Index_, but not in the _Local repository_ this command will remove it from the _Index_ and we will only have it in the _Working area_. In other words the file will be unstaged.
 
