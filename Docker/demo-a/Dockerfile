@@ -1,5 +1,5 @@
 # Base image
-FROM node:16.2-alpine3.11
+FROM node:16-alpine3.11
 
 # here we specify which will be working directory inside the container
 # in the copy command now we use ./ which will be this working directory, because we don't want to move local files in the root folder of the container
@@ -11,7 +11,7 @@ WORKDIR /usr/app
 COPY ./package.json ./
 RUN npm install
 
-# Here we will copy all the files(index.js, etc.) from the current folder to the container, by default they are not included
+# Here we will copy all the files(index.js, etc.) from the current folder to the container selected workdir, by default they are not included
 COPY ./ ./
 
 # Default command, when starting the image. Will result in 'npm start'

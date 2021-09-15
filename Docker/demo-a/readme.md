@@ -10,51 +10,31 @@ That is why we use the COPY trick with only package.json file and npm install, s
 
 ## Usage
 
-1. First you need to build the Image, run the command:
+Recommended to use Windows Powershell as a terminal for the below commands.
 
-```
-docker build -t biserivanov/myapp:latest .
-```
-
-2. Next is to run the Image, run:
-
-```
-docker run -p 3000:3000 biserivanov/myapp
-```
-
-On this step we need to map the port of our computer to a port inside of the container. In our case, when we access port 3000 on the computer it will be redirected to port 3000 in the container and our app is listening on that port. The -p flag is for ports usage.
-
----
-
-ALTERNATIVELY YOU CAN USE:
-
-If you get permission denied, when testing locally, try with this approach:
-
-1. First build the image. Use the command in the directory, where is the Dockerfile
+1. First build the image. Use the command in the directory, where is the Dockerfile. This command will create our image which we will use to run our container based on the image
 
 ```
 docker build .
 ```
 
-2. Run the image:
+2. Run below command to get list of Images, find the one you just built
 
 ```
-docker run -p 3000:3000 .
+docker images
 ```
+
+3. Run the image (don't forget the dot in the end for the current directory):
+
+```
+docker run -p 3000:3000 image-id-here
+```
+
+On this step we need to map the port of our computer to a port inside of the container. In our case, when we access port 3000 on the computer it will be redirected to port 3000 in the container and our app is listening on that port. The -p flag is for ports usage.
 
 ## Debugging
 
-For debugging you can use the below command, which will open a terminal inside of the container.
-
-```
-docker exec -it biserivanov/myapp sh
-```
-
----
-
-ALTERNATIVELY
-
-Use the below steps:
+For debugging you can use the below command, which will open a terminal inside of the container. There is no need to stop the running container for this command, just open a new terminal.
 
 1. Check running containers ids:
 
@@ -67,3 +47,5 @@ docker ps
 ```
 docker exec -it container-id-here sh
 ```
+
+3. Type _exit_ and press enter if you want to exit and end the debugging.

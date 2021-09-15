@@ -60,16 +60,9 @@ You should see the version of the docker compose.
 
 ---
 
-## General info
-
-**Image** - an Image is the application we want to run.
-**Container** - a Container is an instance of that image running as a process. You can have many containers running off the same image.
-
 ## Docker commands
 
 ### General
-
-- **docker version** - to check if we have installed Docker, we should see the Client and the Server version.
 
 - **docker** - will display list of commands we can use on docker.
 
