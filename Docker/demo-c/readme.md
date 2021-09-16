@@ -8,5 +8,13 @@ This demo is about how to use volumes, which allow us to create reference from f
 2. Run the below command
 
 ```
-docker-compose up
+docker compose up
+```
+
+## Running react tests
+
+You can use the below command to run the tests.
+
+```
+docker exec -it container-id-here npm run test
 ```
