@@ -1,5 +1,5 @@
 # First step - build the react app
-FROM node:16.2-alpine3.11 AS builder
+FROM node:16-alpine3.11 AS builder
 
 RUN mkdir /usr/app
 
