@@ -6,14 +6,14 @@ const redisClient = redis.createClient({
   retry_strategy: () => 1000, // if we lose connection we will retry to connect every second
 });
 
-const sub = redisClient.duplicate();
+const subscription = redisClient.duplicate();
 
 function calculateVAT(value) {
   return value * 1.2;
 }
 
-sub.on('message', (channel, message) => {
+subscription.on('message', (channel, message) => {
   redisClient.hset('prices', message, calculateVAT(parseInt(message, 10)));
 });
 
-sub.subscribe('insert');
+subscription.subscribe('insert');

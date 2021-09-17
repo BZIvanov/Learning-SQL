@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres_password
   redis:
-    image: 'redis:latest'
+    image: 'redis:latest' # here we take already built image from docker hub
   nginx:
     restart: always
     build:
@@ -14,7 +14,7 @@ services:
     ports:
       - '3000:80'
   api:
-    build:
+    build: # here we specify based on which file we will build our custom image
       context: ./server
       dockerfile: Dockerfile
     volumes:
