@@ -30,7 +30,7 @@ const redisClient = redis.createClient({
   retry_strategy: () => 1000,
 });
 
-const sub = redisClient.duplicate();
+const subscription = redisClient.duplicate();
 
 // API setup
 app.get('/', (req, res) => {
@@ -52,7 +52,7 @@ app.post('/prices', async (req, res) => {
   const { price } = req.body;
 
   redisClient.hset('prices', price, 'Working on it!');
-  sub.publish('insert', price);
+  subscription.publish('insert', price);
 
   pgClient.query('INSERT INTO prices(number) VALUES($1)', [price]);
 

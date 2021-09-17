@@ -4,7 +4,7 @@ import axios from 'axios';
 const App = () => {
   const [usedPrices, setUsedPrices] = useState([]);
   const [vats, setVats] = useState({});
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const fetchUsedPrices = async () => {
@@ -25,7 +25,7 @@ const App = () => {
     e.preventDefault();
 
     await axios.post('/api/prices', { price });
-    setPrice('');
+    setPrice(0);
   };
 
   return (
@@ -36,7 +36,7 @@ const App = () => {
             name='price'
             type='number'
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(+e.target.value)}
           />
           <button type='submit'>Calculate</button>
         </form>

@@ -1,12 +1,12 @@
-FROM node:16.2-alpine3.11
+FROM node:16-alpine3.11
 
 RUN mkdir /usr/app
 
 WORKDIR /usr/app
 
-COPY package.json .
+COPY package.json ./
 RUN npm install
 
-COPY . .
+COPY ./ ./
 
 CMD ["npm", "start"]
