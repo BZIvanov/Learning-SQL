@@ -271,6 +271,7 @@ SELECT COUNT(DISTINCT first_name) FROM students;
 
 This function is usually not used on its own, because behind the scenes it creates groups of rows, but if display it we will see only the first row of each group. In the below example COUNT will count for each group.
 So basically GROUP BY will create multiple tables based on the different grades and the SELECT will operate for each individual table.
+GROUP BY is usually used with some aggregate functions so we can see meaningful results instead of just the first rows of our subtables.
 
 ```sql
 SELECT grades, COUNT(*) AS count FROM students GROUP BY grades;
