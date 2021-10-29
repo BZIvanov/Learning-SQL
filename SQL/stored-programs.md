@@ -1,8 +1,8 @@
-## Stored programs
+# Stored programs
 
-Stored programs include: stored procedures, stored functions, events and triggers.
+Stored programs include: stored procedures, functions, events and triggers.
 
-### Stored procedures
+## Stored procedures
 
 You can see your stored procedures for the database in workbench if you expand the database and they will be listed under 'Stored Procedures'.
 
@@ -44,6 +44,10 @@ CALL GetFruits();
 DROP PROCEDURE GetFruits;
 ```
 
+```sql
+DROP PROCEDURE IF EXISTS GetFruits;
+```
+
 #### demo - create procedure with parameters
 
 1. Setup the database and table.
@@ -79,7 +83,53 @@ CALL InsertFruit('cherry');
 SELECT * FROM fruit;
 ```
 
-### Triggers
+## Functions
+
+You can see your functions for the database in workbench if you expand the database and they will be listed under 'Functions'.
+
+#### demo - create, use and delete stored procedure
+
+1. First we will setup the database and creating simple table, use the code below.
+
+```sql
+CREATE DATABASE food;
+USE food;
+CREATE TABLE fruit (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(20), PRIMARY KEY (id));
+INSERT INTO fruit (id, name) VALUES (1, 'Apple'), (2, 'Orange'), (3, 'Plum'), (4, 'Avocado');
+```
+
+2. Now we will create our function.
+
+```sql
+DELIMITER //
+CREATE FUNCTION GetFavoriteFruit(fruit_id INT)
+RETURNS VARCHAR(20)
+BEGIN
+	DECLARE FruitName VARCHAR(20);
+
+    SELECT name INTO FruitName FROM fruit WHERE id = fruit_id;
+
+    RETURN(FruitName);
+END//
+DELIMITER ;
+```
+
+3. And here is example how we can call/use our function.
+
+```sql
+-- Apple
+SELECT GetFavoriteFruit(1);
+-- Orange
+SELECT GetFavoriteFruit(2);
+```
+
+4. And here is example how we delete our function if we don't need them anymore.
+
+```sql
+DROP FUNCTION GetFavoriteFruit;
+```
+
+## Triggers
 
 Triggers are executed automatically, when DML operation like insert, update or delete is executed.
 
