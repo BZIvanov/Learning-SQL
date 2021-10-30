@@ -129,6 +129,10 @@ SELECT GetFavoriteFruit(2);
 DROP FUNCTION GetFavoriteFruit;
 ```
 
+## Events
+
+Events are executed according to event scheduler.
+
 ## Triggers
 
 Triggers are executed automatically, when DML operation like insert, update or delete is executed.
