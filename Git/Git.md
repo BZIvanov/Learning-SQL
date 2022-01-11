@@ -43,6 +43,7 @@ Note: There is one more place except the above 4 and that is the _Stash_. There 
 - **git add file.txt** - will move the specified file from the _Working area_ to the _Staging area_, where the file is ready to be commited
 - **git add .** - similar to the above command, but will be applied on all files, not just the one specified. This command will add files recursively, meaning files in nested folders also
 - **git commit -m "Some message text"** - will move files from _Staging area_ to the _Local repository_, where we can proceed with pushing to the _Remote repository_. -m stands for the message we want to provide
+- **git commit --allow-empty -m "empty commit"** - running this command will create empty commit even if we have no code changes. Then we can push this commit if we want to trigger some build in the pipeline for example
 - **git pull origin master** - will get the remote repository and update our local repository so both are the same. It is good practice to do this operation before pushing to assure we have the latest changes
 - **git push origin master** - will push the files from local repository to the remote repository. Origin is the name of the remote repository and Master is the branch from local repository from which we will push to the remote repository. If we want to push from a different branch we have to provide it's name and checkout it before that
 - **git push origin --delete remote-branch-name-here** - will delete a branch on the remote repository
