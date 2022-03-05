@@ -15,3 +15,4 @@ Work in a bash terminal, because the normal one doesn't support all commands lik
 - **touch index.js** - will create js file
 - **rm index.js** - will remove the specified file
 - **> some-file-name.txt** - this command will delete the content of a file. For example navigate to the file's directory and run the command and all text will be deleted and your file will be empty
+- **grep sometext some-filename** - this command will search for the text _sometext_ in a file named _some-filename_
