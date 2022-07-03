@@ -58,6 +58,50 @@
   <body>
     <section>
       <div class="title">
+        <h3>Create new database user</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            This query will create new user with which we can access the
+            database.
+          </li>
+          <li>
+            When we create an user by default it has no privilegies. We can
+            grant or revoke them additionally.
+          </li>
+          <li>
+            In pgAdmin you can see the user under Login/Group Roles which is
+            next to Databases.
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <b>CREATE USER</b> my_new_user <b>WITH PASSWORD</b> '12345'
+        <b>VALID UNTIL</b> 'Jul 1, 2022';
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
+        <h3>Grant privilegies to an user</h3>
+      </div>
+      <div class="info">
+        <ul>
+          <li>
+            This query will grant privilegies to an user to interact with the
+            database.
+          </li>
+        </ul>
+      </div>
+      <div class="query">
+        <b>GRANT SELECT, UPDATE, INSERT, DELETE ON</b> my_table_name
+        <b>TO</b> my_new_user;
+      </div>
+    </section>
+
+    <section>
+      <div class="title">
         <h3>Create new table</h3>
       </div>
       <div class="info">
