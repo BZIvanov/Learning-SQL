@@ -98,6 +98,19 @@ Note: There is one more place except the above 4 and that is the _Stash_. There 
 
 - **git rm --cached file.txt** - if we have a file which is in _Working Area_ and _Index_, but not in the _Local repository_ this command will remove it from the _Index_ and we will only have it in the _Working area_. In other words the file will be unstaged.
 
+### Debugging
+
+With git `bisect` we can track specific commit after a bug appeared using binary search.
+
+The process is similar to bellow steps:
+
+- `git bisect start`
+- `git bisect bad commit-hash-here` - commit where we already have the bug
+- `git bisect good commit-hash-here` - commit where the bug does not exist yet
+- `git bisect good` or `git bisect bad` - git will keep suggesting us a commit in the middle and we have to specify if it is bad or good to keep narrowing the possible bad commit. We will have to keep repeating this step in a while loop until we find the bad commit
+- after we are done narrowing and find the bad commit git will provide us info about which it is
+- `git bisect reset` - after we found the bad commit let's reset the bisect process
+
 ### Tips
 
 - HEAD - points to the last commit on the current branch
