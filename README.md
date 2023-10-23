@@ -1,1 +1,3 @@
-# This repo contains basic understanding materials for SQL, Git and Docker
+# SQL
+
+Contains learning materials for SQL.
