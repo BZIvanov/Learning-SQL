@@ -659,3 +659,355 @@ ORDER BY city, income DESC, name;
 | Eli      | Varna   | 4900   |
 
 ---
+
+##### Skip and limit results
+
+- Useful for example for pagination.
+
+| name     | city    | income |
+| -------- | ------- | ------ |
+| Angelina | Sofia   | 5000   |
+| Valeria  | Sofia   | 5200   |
+| Evgeni   | Plovdiv | 4250   |
+| Traqn    | Plovdiv | 4900   |
+| Eli      | Varna   | 4990   |
+
+```sql
+SELECT * FROM people ORDER BY income LIMIT 2 OFFSET 2;
+```
+
+| name     | city  | income |
+| -------- | ----- | ------ |
+| Eli      | Varna | 4990   |
+| Angelina | Sofia | 5000   |
+
+---
+
+##### Union results
+
+- Useful for combining the result of different queries.
+- Both queries must produce similar column structure.
+- Without union all, just union we would get 3 results, because duplicates are ignored.
+- If we use INTERSECT instead of UNION we would get only common results for both queries.
+- If we use EXCEPT instead of UNION we would get the results from the first query except the results returned from the second query. Basically everything present in the first query except the second.
+
+| name     | income | taxes  |
+| -------- | ------ | ------ |
+| Angelina | 5000   | 350.50 |
+| Valeria  | 5200   | 220    |
+| Evgeni   | 4250   | 160    |
+| Traqn    | 4900   | 190    |
+| Eli      | 4990   | 90     |
+
+```sql
+(SELECT * FROM people ORDER BY income DESC LIMIT 2)
+UNION ALL
+(SELECT * FROM people ORDER BY income - taxes DESC LIMIT 2);
+```
+
+| name     | income | taxes  |
+| -------- | ------ | ------ |
+| Valeria  | 5200   | 220    |
+| Angelina | 5000   | 350.50 |
+| Valeria  | 5200   | 220    |
+| Eli      | 4990   | 90     |
+
+---
+
+##### Sub queries
+
+- With sub queries we can use the result of one query in another.
+- Very important note here is to understand the returned type of the subquery. It is not table with one or many columns and rows. It is scalar type, single value which we can reuse. Basically, because the result is one column and one row.
+
+| name     | income |
+| -------- | ------ |
+| Angelina | 5000   |
+| Valeria  | 5200   |
+| Evgeni   | 4250   |
+
+```sql
+SELECT * FROM people WHERE income > (
+  SELECT income FROM people WHERE name = 'Angelina'
+);
+```
+
+| name    | income |
+| ------- | ------ |
+| Valeria | 5200   |
+
+---
+
+##### Sub queries in the select clause
+
+- For our custom column we will have value calculated with the scalar result returned by the subquery.
+
+| name     | income |
+| -------- | ------ |
+| Angelina | 5000   |
+| Valeria  | 5200   |
+| Evgeni   | 4250   |
+
+```sql
+SELECT name, income, income / (SELECT max(income) FROM people) AS ratio
+FROM people ORDER BY income DESC;
+```
+
+| name     | income | ratio                  |
+| -------- | ------ | ---------------------- |
+| Valeria  | 5200   | 1.00000000000000000000 |
+| Angelina | 5000   | 0.96153846153846153846 |
+| Evgeni   | 4250   | 0.81730769230769230769 |
+
+---
+
+##### Sub queries in the from clause
+
+- We are required to use alias AS c even if we don't use it.
+- Outside the subquery, we can only use columns from the subquery.
+
+| name | city    | income |
+| ---- | ------- | ------ |
+| Mira | Sofia   | 4500   |
+| Iva  | Plovdiv | 5100   |
+| Tina | Plovdiv | 4750   |
+| Ivan | Sofia   | 5500   |
+| Deni | Sofia   | 4900   |
+
+```sql
+SELECT avg(c.cities_count)
+FROM (
+  SELECT city, COUNT(*) AS cities_count FROM people GROUP BY city
+) AS c;
+```
+
+| avg                |
+| ------------------ |
+| 2.5000000000000000 |
+
+---
+
+##### Sub queries with join
+
+- We will get users who purchased rice
+
+**_users_**
+
+| id<sup>PK</sup> | name  |
+| --------------- | ----- |
+| 1               | Mira  |
+| 2               | Iva   |
+| 3               | Tanq  |
+| 4               | Misho |
+
+**_products_**
+
+| id<sup>PK</sup> | product_name |
+| --------------- | ------------ |
+| 1               | Sugar        |
+| 2               | Rice         |
+| 3               | Milk         |
+
+**_purchases_**
+
+| id<sup>PK</sup> | user_id<sup>FK</sup> | product_id<sup>FK</sup> |
+| --------------- | -------------------- | ----------------------- |
+| 1               | 1                    | 1                       |
+| 2               | 1                    | 3                       |
+| 3               | 2                    | 2                       |
+| 4               | 3                    | 1                       |
+| 5               | 3                    | 2                       |
+
+```sql
+SELECT name FROM users
+INNER JOIN (
+  SELECT user_id FROM purchases WHERE product_id = 2
+) AS p ON p.user_id = users.id;
+```
+
+| name |
+| ---- |
+| Iva  |
+| Tanq |
+
+---
+
+##### Sub queries in where clause
+
+- Inner select will return 1 column only so we can use it as array of values.
+
+**_users_**
+
+| id<sup>PK</sup> | name  | income | taxes |
+| --------------- | ----- | ------ | ----- |
+| 1               | Mira  | 5200   | 700   |
+| 2               | Iva   | 5100   | 900   |
+| 3               | Tanq  | 5500   | 1100  |
+| 4               | Misho | 4900   | 900   |
+
+**_purchases_**
+
+| id<sup>PK</sup> | user_id<sup>FK</sup> | product_id<sup>FK</sup> |
+| --------------- | -------------------- | ----------------------- |
+| 1               | 1                    | 1                       |
+| 2               | 1                    | 3                       |
+| 3               | 2                    | 2                       |
+| 4               | 3                    | 1                       |
+| 5               | 3                    | 2                       |
+
+```sql
+SELECT id FROM purchases WHERE user_id IN (
+  SELECT id FROM users WHERE income - taxes > 4300
+);
+```
+
+| id  |
+| --- |
+| 1   |
+| 2   |
+| 4   |
+| 5   |
+
+---
+
+##### Another subquery example
+
+- With ALL we will select onlyy users which have income higher than anyone from Plovdiv.
+- With similar syntax with using SOME we can also achieve filtering behaviour.
+
+| name  | city    | income |
+| ----- | ------- | ------ |
+| Mira  | Sofia   | 5200   |
+| Iva   | Plovdiv | 5100   |
+| Tanq  | Sofia   | 5500   |
+| Misho | Sofia   | 4900   |
+| Zaro  | Plovdiv | 5000   |
+
+```sql
+SELECT * FROM users WHERE income > ALL (
+  SELECT income FROM users WHERE city = 'Plovdiv'
+);
+```
+
+| name | city  | income |
+| ---- | ----- | ------ |
+| Mira | Sofia | 5200   |
+| Tanq | Sofia | 5500   |
+
+---
+
+##### Select unique values
+
+- We will count all unique values, without count we would get once Sofia and once Plovdiv.
+
+| name | city    |
+| ---- | ------- |
+| Mira | Sofia   |
+| Iva  | Plovdiv |
+| Tanq | Sofia   |
+
+```sql
+SELECT COUNT(DISTINCT city) FROM users;
+```
+
+| count |
+| ----- |
+| 2     |
+
+---
+
+##### Switch case
+
+- With Case we can get conditional value.
+
+| name  | city    | income |
+| ----- | ------- | ------ |
+| Mira  | Sofia   | 5200   |
+| Iva   | Plovdiv | 5100   |
+| Tanq  | Sofia   | 5500   |
+| Misho | Sofia   | 4900   |
+| Zaro  | Plovdiv | 5000   |
+
+```sql
+SELECT name,
+  CASE
+    WHEN income < 5000 THEN 'low'
+    WHEN income < 5500 THEN 'average'
+    ELSE 'high'
+  END AS formatted_income
+FROM users;
+```
+
+| name  | formatted_income |
+| ----- | ---------------- |
+| Mira  | average          |
+| Iva   | average          |
+| Tanq  | high             |
+| Misho | low              |
+| Zaro  | average          |
+
+---
+
+##### Insights
+
+- With the following query we can get info of how our query was processed.
+- For example we can see the execution time of our query.
+
+| id  | name |
+| --- | ---- |
+| 1   | Eli  |
+| 2   | Mira |
+| 3   | Toni |
+
+```sql
+EXPLAIN SELECT * FROM users WHERE name = 'Eli';
+```
+
+| QUERY PLAN                                                              |
+| ----------------------------------------------------------------------- |
+| Bitmap Heap Scan on users (cost=4.18..12.64 rows=4 width=62)            |
+| Recheck Cond: ((name)::text = 'Eli'::text)                              |
+| -> Bitmap Index Scan on users_name_idx (cost=0.00..4.18 rows=4 width=0) |
+| Index Cond: ((name)::text = 'Eli'::text)                                |
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM users WHERE name = 'Eli';
+```
+
+| QUERY PLAN                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------- |
+| Bitmap Heap Scan on users (cost=4.18..12.64 rows=4 width=62) (actual time=0.016..0.016 rows=1 loops=1)            |
+| Recheck Cond: ((name)::text = 'Eli'::text)                                                                        |
+| Heap Blocks: exact=1                                                                                              |
+| -> Bitmap Index Scan on users_name_idx (cost=0.00..4.18 rows=4 width=0) (actual time=0.012..0.012 rows=1 loops=1) |
+| Index Cond: ((name)::text = 'Eli'::text)                                                                          |
+| Planning Time: 0.049 ms                                                                                           |
+| Execution Time: 0.031 ms                                                                                          |
+
+---
+
+##### Transaction
+
+- Transaction are usefull for operations requiring multiple queries depending on each other. If one of the queries for example fail we might want to cancel all the other queries.
+- BEGIN will begin the transaction duplicating imaginary database on which we can run commands and the changes will be applied once we commit them.
+- In pgAdmin if you open 2 query windows and running transaction on the first window, in the 2nd window you will see the changes applied once commited.
+- Because the point of transactions is to remove the effect of the queries in case of error, we do that with the key word ROLLBACK. It will revert all the queries in the transaction(remove our imaginary database).
+- In terms of syntax we can use either BEGIN or BEGIN TRANSACTION
+
+| id  | name | amount |
+| --- | ---- | ------ |
+| 1   | Eli  | 200    |
+| 2   | Iva  | 100    |
+
+```sql
+BEGIN;
+UPDATE people SET amount = amount - 50 WHERE name = 'Eli';
+UPDATE people SET amount = amount + 50 WHERE name = 'Iva';
+COMMIT;
+```
+
+| id  | name | amount |
+| --- | ---- | ------ |
+| 1   | Eli  | 150    |
+| 2   | Iva  | 150    |
+
+---
