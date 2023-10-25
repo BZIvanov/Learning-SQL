@@ -285,3 +285,377 @@ SELECT name, city FROM people WHERE monthly_income >= 7000 AND city = 'Plovdiv';
 | Iva  | Plovdiv |
 
 ---
+
+##### Between value or in array of values
+
+- This is how we can filter results.
+
+| name | city    | monthly_income | travel_spendings |
+| ---- | ------- | -------------- | ---------------- |
+| Mira | Sofia   | 5800           | 2200             |
+| Iva  | Plovdiv | 7200           | 1900             |
+
+```sql
+SELECT name, city FROM people
+WHERE monthly_income BETWEEN 5000 AND 7000 AND city IN ('Sofia', 'Varna');
+```
+
+| name | city  |
+| ---- | ----- |
+| Mira | Sofia |
+
+---
+
+##### Update value
+
+- We can update all values or some, based on condition.
+
+| name | city    | monthly_income | travel_spendings |
+| ---- | ------- | -------------- | ---------------- |
+| Mira | Sofia   | 5800           | 2200             |
+| Iva  | Plovdiv | 7200           | 1900             |
+
+```sql
+UPDATE people SET monthly_income = 6900 WHERE name = 'Mira' OR city = 'Sofia';
+```
+
+| name | city    | monthly_income | travel_spendings |
+| ---- | ------- | -------------- | ---------------- |
+| Mira | Sofia   | 6900           | 2200             |
+| Iva  | Plovdiv | 7200           | 1900             |
+
+---
+
+##### Update value conditionally
+
+- Advanced update
+
+**_people_**
+
+| id<sup>PK</sup> | name | salary |
+| --------------- | ---- | ------ |
+| 1               | Mira | 2200   |
+| 2               | Iva  | 1900   |
+| 3               | Ivan | 2100   |
+
+**_holidays_**
+
+| id<sup>PK</sup> | person_id<sup>FK</sup> | start_date | end_date   |
+| --------------- | ---------------------- | ---------- | ---------- |
+| 1               | 1                      | 2021-12-02 | 2021-12-12 |
+| 2               | 2                      | 2021-07-15 | 2021-07-25 |
+| 3               | 3                      | 2021-09-11 | 2021-09-21 |
+
+```sql
+UPDATE holidays SET start_date = CASE
+  WHEN people.salary <= 2100 THEN start_date - 1
+  WHEN people.salary > 2100 THEN start_date + 1
+END
+FROM people
+WHERE people.id = holidays.person_id AND (people.salary <= 2100 OR people.salary > 2200);
+```
+
+| id<sup>PK</sup> | person_id<sup>FK</sup> | start_date | end_date   |
+| --------------- | ---------------------- | ---------- | ---------- |
+| 1               | 1                      | 2021-12-02 | 2021-12-12 |
+| 2               | 2                      | 2021-07-14 | 2021-07-25 |
+| 3               | 3                      | 2021-09-10 | 2021-09-21 |
+
+---
+
+##### Delete row/rows
+
+- We can delete all rows or some, based on condition.
+
+| name | city    | monthly_income | travel_spendings |
+| ---- | ------- | -------------- | ---------------- |
+| Mira | Sofia   | 5800           | 2200             |
+| Iva  | Plovdiv | 7200           | 1900             |
+
+```sql
+DELETE FROM people WHERE name = 'Mira';
+```
+
+| name | city    | monthly_income | travel_spendings |
+| ---- | ------- | -------------- | ---------------- |
+| Iva  | Plovdiv | 7200           | 1900             |
+
+---
+
+### Joining tables
+
+##### Inner Join
+
+- Inner join will return result which are match in both tables.
+
+**_users_**
+
+| id<sup>PK</sup> | name   |
+| --------------- | ------ |
+| 1               | Mira   |
+| 2               | Sofia  |
+| 3               | Ivan   |
+| 4               | Metodi |
+| 5               | Marina |
+
+**_images_**
+
+| id<sup>PK</sup> | url         | user_id<sup>FK</sup> |
+| --------------- | ----------- | -------------------- |
+| 1               | image-1.png | 1                    |
+| 2               | image-2.png | 1                    |
+| 3               | image-3.png | 2                    |
+| 4               | image-4.png | 2                    |
+| 5               | image-5.png | 3                    |
+
+```sql
+SELECT u.id AS uid, name, i.id AS iid, url, user_id
+FROM users AS u INNER JOIN images AS i ON u.id = i.user_id;
+```
+
+| uid | name  | iid | url         | user_id |
+| --- | ----- | --- | ----------- | ------- |
+| 1   | Mira  | 1   | image-1.png | 1       |
+| 1   | Mira  | 2   | image-2.png | 1       |
+| 2   | Sofia | 3   | image-3.png | 2       |
+| 2   | Sofia | 4   | image-4.png | 2       |
+| 3   | Ivan  | 5   | image-5.png | 3       |
+
+---
+
+##### Left Join
+
+- Left join will get all the records from the table on the left.
+
+**_users_**
+
+| id<sup>PK</sup> | name   |
+| --------------- | ------ |
+| 1               | Mira   |
+| 2               | Sofia  |
+| 3               | Ivan   |
+| 4               | Metodi |
+| 5               | Marina |
+
+**_images_**
+
+| id<sup>PK</sup> | url         | user_id<sup>FK</sup> |
+| --------------- | ----------- | -------------------- |
+| 1               | image-1.png | 1                    |
+| 2               | image-2.png | 1                    |
+| 3               | image-3.png | 2                    |
+| 4               | image-4.png | 2                    |
+| 5               | image-5.png | 3                    |
+
+```sql
+SELECT u.id AS uid, name, i.id AS iid, url, user_id
+FROM users AS u LEFT JOIN images AS i ON u.id = i.user_id;
+```
+
+| uid | name   | iid  | url         | user_id |
+| --- | ------ | ---- | ----------- | ------- |
+| 1   | Mira   | 1    | image-1.png | 1       |
+| 1   | Mira   | 2    | image-2.png | 1       |
+| 2   | Sofia  | 3    | image-3.png | 2       |
+| 2   | Sofia  | 4    | image-4.png | 2       |
+| 3   | Ivan   | 5    | image-5.png | 3       |
+| 4   | Metodi | null | null        | null    |
+| 5   | Marina | null | null        | null    |
+
+---
+
+##### Join with condition
+
+- Display only users who commented on their own pics.
+
+**_users_**
+
+| id<sup>PK</sup> | name   |
+| --------------- | ------ |
+| 1               | Mira   |
+| 2               | Sofia  |
+| 3               | Ivan   |
+| 4               | Metodi |
+| 5               | Marina |
+
+**_images_**
+
+| id<sup>PK</sup> | url         | user_id<sup>FK</sup> |
+| --------------- | ----------- | -------------------- |
+| 1               | image-1.png | 1                    |
+| 2               | image-2.png | 1                    |
+| 3               | image-3.png | 2                    |
+| 4               | image-4.png | 2                    |
+| 5               | image-5.png | 3                    |
+
+**_comments_**
+
+| id<sup>PK</sup> | body            | user_id<sup>FK</sup> | image_id<sup>FK</sup> |
+| --------------- | --------------- | -------------------- | --------------------- |
+| 1               | Pic of me       | 1                    | 3                     |
+| 2               | My best picture | 2                    | 5                     |
+| 3               | Nature picture  | 3                    | 2                     |
+
+```sql
+SELECT body, url, i.user_id AS img_user_id, c.user_id AS com_user_id, c.image_id AS com_img_id
+FROM comments AS c INNER JOIN images AS i ON c.image_id = i.id
+WHERE c.user_id = i.user_id;
+```
+
+| body      | url         | img_user_id | com_user_id | com_img_id |
+| --------- | ----------- | ----------- | ----------- | ---------- |
+| Pic of me | image-3.png | 2           | 2           | 3          |
+
+---
+
+##### Join on generated table
+
+- Except directly selecting a table we can also use generated by union two tables
+
+**_users_**
+
+| id<sup>PK</sup> | name |
+| --------------- | ---- |
+| 1               | Eli  |
+| 2               | Mira |
+| 3               | Iva  |
+
+**_charities_**
+
+| id<sup>PK</sup> | amount | user_id<sup>FK</sup> |
+| --------------- | ------ | -------------------- |
+| 1               | 150    | 1                    |
+| 2               | 235    | 1                    |
+| 3               | 118    | 2                    |
+| 4               | 211    | 3                    |
+| 5               | 98     | 3                    |
+
+**_spendings_**
+
+| id<sup>PK</sup> | amount | user_id<sup>FK</sup> |
+| --------------- | ------ | -------------------- |
+| 1               | 250    | 1                    |
+| 2               | 118    | 2                    |
+| 3               | 57     | 2                    |
+| 4               | 305    | 2                    |
+| 5               | 24     | 3                    |
+
+```sql
+SELECT name, activities.amount FROM users
+INNER JOIN (
+  SELECT user_id, amount FROM charities
+  UNION ALL
+  SELECT user_id, amount FROM spendings
+) AS activities ON activities.user_id = users.id;
+```
+
+or alternative syntax using common table expression
+
+```sql
+WITH activities AS (
+  SELECT user_id, amount FROM charities
+  UNION ALL
+  SELECT user_id, amount FROM spendings
+)
+SELECT name, activities.amount FROM users
+INNER JOIN activities AS activities ON activities.user_id = users.id;
+```
+
+| name | amount |
+| ---- | ------ |
+| Eli  | 150    |
+| Eli  | 235    |
+| Mira | 118    |
+| Iva  | 211    |
+| Iva  | 98     |
+| Eli  | 250    |
+| Mira | 118    |
+| Mira | 57     |
+| Mira | 305    |
+| Iva  | 24     |
+
+---
+
+##### Grouping data
+
+- Group by is creating multiple subtables based on what we group by and executing aggregate functions on those subtables.
+- After the select we can only have columns which appear after group by or aggreagte functions
+
+| name   | city    | income |
+| ------ | ------- | ------ |
+| Mira   | Sofia   | 5200   |
+| Mitko  | Sofia   | 4000   |
+| Iva    | Plovdiv | 3800   |
+| Toni   | Plovdiv | 5000   |
+| Polina | Varna   | 4500   |
+
+```sql
+SELECT city, avg(income) AS average_income FROM people
+GROUP BY city;
+```
+
+| city    | average_income |
+| ------- | -------------- |
+| Sofia   | 4600.00000     |
+| Varna   | 4500.00000     |
+| Plovdiv | 4400.00000     |
+
+---
+
+##### Grouping data with having
+
+- WHERE will filter first some of the rows, then GROU BY will create subgroups and HAVING will filter the subgroups.
+- Based on the above text, WHERE is filtering based on individual rows and HAVING on whole groups.
+
+| name     | city    | income |
+| -------- | ------- | ------ |
+| Angelina | Sofia   | 5000   |
+| Valeria  | Sofia   | 5200   |
+| Evgeni   | Plovdiv | 4250   |
+| Traqn    | Plovdiv | 4900   |
+| Eli      | Varna   | 4990   |
+
+```sql
+SELECT city, avg(income) AS average_income FROM people
+WHERE income <= 5000
+GROUP BY city
+HAVING COUNT(*) > 1;
+```
+
+| city    | average_income |
+| ------- | -------------- |
+| Plovdiv | 4575.00000     |
+
+---
+
+##### Sorting data
+
+- We will first sort by city ascending, then equal cities will be sorted by price descending and last by name.
+- Ascending is by default so no need to specify it.
+
+| name     | city    | income |
+| -------- | ------- | ------ |
+| Angelina | Sofia   | 5000   |
+| Valeria  | Sofia   | 5200   |
+| Evgeni   | Plovdiv | 4250   |
+| Traqn    | Plovdiv | 4900   |
+| Eli      | Varna   | 4990   |
+| Eli      | Sofia   | 5100   |
+| Mira     | Plovdiv | 4900   |
+
+```sql
+SELECT * FROM people
+ORDER BY city, income DESC, name;
+```
+
+| name     | city    | income |
+| -------- | ------- | ------ |
+| Mira     | Plovdiv | 4900   |
+| Traqn    | Plovdiv | 4900   |
+| Evgeni   | Plovdiv | 4250   |
+| Valeria  | Sofia   | 5200   |
+| Eli      | Sofia   | 5100   |
+| Angelina | Sofia   | 5000   |
+| Eli      | Varna   | 4900   |
+
+---
