@@ -1,10 +1,6 @@
-# About SQL
+# SQL
 
-sql is the database itself and the language to use the database. Mysql, Postresql and some others are so called DBMS database management systems which make using the database easier.
-
-# SQL Datatypes
-
-To review the datatypes click [here](https://www.w3schools.com/sql/sql_datatypes.asp).
+SQL is the database itself and the language to use the database. Mysql, Postresql and some others are so called DBMS database management systems which make using the database easier.
 
 ---
 
@@ -169,18 +165,6 @@ aliases will not affect the actual data, but with them we can display columns wi
 SELECT student_id AS id FROM students;
 ```
 
-6. Update data:
-
-```sql
-UPDATE students SET grade = 3 WHERE status = 'completed';
-```
-
-7. Delete data:
-
-```sql
-DELETE FROM students WHERE grade < 3;
-```
-
 ---
 
 # String functions
@@ -318,33 +302,4 @@ SELECT name, grades FROM students WHERE name = 'Ema' OR grades != 5;
 
 ```sql
 SELECT name, grades FROM students WHERE name IN ('Ema', 'Toni', 'Miro');
-```
-
-3. Switch case
-
-here we will get 3 columns: name, grades and result. Result for each row will have value depending on the grade for each row.
-
-```sql
-SELECT name, grades,
-    CASE
-        WHEN grades >= 5 THEN 'Excellent'
-        WHEN grades >= 4 THEN 'Good'
-        WHEN grades BETWEEN 2.5 AND 4 THEN 'Bad'
-        ELSE 'Study more'
-    END AS result
-FROM students;
-```
-
-# More on SQL
-
-1. With union we can combine the results in a single table.
-
-The number of columns selected in the first select must match with the second select.
-
-The columns in the result table will be named based on the first select.
-
-```sql
-SELECT name, grade FROM students
-UNION
-SELECT teacher, age FROM teachers;
 ```

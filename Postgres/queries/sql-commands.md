@@ -685,8 +685,9 @@ SELECT * FROM people ORDER BY income LIMIT 2 OFFSET 2;
 
 ##### Union results
 
-- Useful for combining the result of different queries.
-- Both queries must produce similar column structure.
+- Useful for combining the result of different queries in a single table.
+- Both queries must produce similar column structure. The number of columns selected in the first select must match with the second select.
+- The columns in the result table will be named based on the first select.
 - Without union all, just union we would get 3 results, because duplicates are ignored.
 - If we use INTERSECT instead of UNION we would get only common results for both queries.
 - If we use EXCEPT instead of UNION we would get the results from the first query except the results returned from the second query. Basically everything present in the first query except the second.
@@ -1009,5 +1010,55 @@ COMMIT;
 | --- | ---- | ------ |
 | 1   | Eli  | 150    |
 | 2   | Iva  | 150    |
+
+---
+
+##### View of a query
+
+- View is a virtual table
+- The view is not physically materialized. Instead, the query is run every time the view is referenced in a query
+- In pgAdmin you can find your views under Schemas then public then Views
+
+| name    |
+| ------- |
+| Apple   |
+| Orange  |
+| Plum    |
+| Avocado |
+
+```sql
+CREATE VIEW my_fruits AS SELECT * FROM fruits WHERE name LIKE 'A%';
+```
+
+Now, let's use our newly created view.
+
+```sql
+SELECT * FROM my_fruits;
+```
+
+| name    |
+| ------- |
+| Apple   |
+| Avocado |
+
+We can further narrow the results by applying additional filters to our view.
+
+```sql
+SELECT * FROM my_fruits WHERE name LIKE 'Av%';
+```
+
+| name    |
+| ------- |
+| Avocado |
+
+---
+
+##### Delete a view
+
+- Because views are stored in the database, this is how we can delete one of them
+
+```sql
+DROP VIEW my_fruits;
+```
 
 ---
