@@ -1,5 +1,27 @@
 # Relationships
 
+Contains general info for relationships using SQL database.
+
+# Primary key
+
+Primary key is a column of unique values to make all rows unique.
+In the primary key we provide as argument which column we want to be the primary key.
+If we have Auto increment added, we don't need to provide an id every time we add new row to the table.
+Primary key column can not be NULL. We can have more than one column in a table which is primary key, this is called composite columns.
+
+```sql
+CREATE TABLE students (
+    student_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    grade INT,
+    PRIMARY KEY (student_id)
+);
+```
+
+---
+
+# Relationships types
+
 ## One to One
 
 One row from one table is related to only one row from another table.

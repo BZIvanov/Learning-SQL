@@ -12,6 +12,8 @@ CREATE USER my_new_user WITH PASSWORD '12345' VALID UNTIL 'Jul 1, 2024';
 
 ##### Get database users
 
+- Aliases will not affect the actual data, but with them we can display columns with changed names in case we want that
+
 ```sql
 SELECT usename AS username FROM pg_user;
 ```
@@ -270,6 +272,7 @@ SELECT CONCAT (name, ' lives in ', UPPER(city), '.') AS sentence FROM people;
 ##### Filter results
 
 - This is how we can filter results.
+- If working with date and time it is recommended to cast them.
 
 | name | city    | monthly_income | travel_spendings |
 | ---- | ------- | -------------- | ---------------- |
@@ -580,6 +583,7 @@ INNER JOIN activities AS activities ON activities.user_id = users.id;
 
 - Group by is creating multiple subtables based on what we group by and executing aggregate functions on those subtables.
 - After the select we can only have columns which appear after group by or aggreagte functions
+- Group by is usually not used on its own, because behind the scenes it creates groups of rows, but if display it, we will see only the first row of each group. So basically GROUP BY will create multiple tables based on the different cities and the SELECT will operate for each individual table. GROUP BY is usually used with some aggregate functions so we can see meaningful results instead of just the first rows of our subtables.
 
 | name   | city    | income |
 | ------ | ------- | ------ |
@@ -899,6 +903,7 @@ SELECT * FROM users WHERE income > ALL (
 ##### Select unique values
 
 - We will count all unique values, without count we would get once Sofia and once Plovdiv.
+- COUNT function will check for count of something we need.
 
 | name | city    |
 | ---- | ------- |
@@ -1018,6 +1023,7 @@ COMMIT;
 - View is a virtual table
 - The view is not physically materialized. Instead, the query is run every time the view is referenced in a query
 - In pgAdmin you can find your views under Schemas then public then Views
+- In case % sign is what we want to search for, we have to use '\' to escape it.
 
 | name    |
 | ------- |
