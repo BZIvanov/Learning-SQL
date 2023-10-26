@@ -1,4 +1,11 @@
-##### Create new database user
+<style>
+  td, th {
+    /* some styles to make the tables smaller */
+    padding: 0px 5px !important;
+  }
+</style>
+
+#### Create new database user
 
 - This query will create new user with which we can access the database.
 - When we create an user by default it has no privilegies. We can grant or revoke them additionally.
@@ -10,7 +17,7 @@ CREATE USER my_new_user WITH PASSWORD '12345' VALID UNTIL 'Jul 1, 2024';
 
 ---
 
-##### Get database users
+#### Get database users
 
 - Aliases will not affect the actual data, but with them we can display columns with changed names in case we want that
 
@@ -25,7 +32,7 @@ SELECT usename AS username FROM pg_user;
 
 ---
 
-##### Grant privilegies to an user
+#### Grant privilegies to an user
 
 - This query will grant privilegies to an user to interact with the database.
 
@@ -35,7 +42,7 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON my_table_name TO my_new_user;
 
 ---
 
-##### Create table
+#### Create table
 
 - This query will create new table called people in our database.
 - Serial is similar to integer, but starting from positive value.
@@ -58,7 +65,7 @@ CREATE TABLE people (
 
 ---
 
-##### Create table with foreign key
+#### Create table with foreign key
 
 - This query will create new table using foreign key.
 - With cascade delete if in table people user with the same id as the foreign key is deleted, the record in this table will be also deleted.
@@ -76,7 +83,7 @@ CREATE TABLE pets (
 
 ---
 
-##### Create table with multi column null check
+#### Create table with multi column null check
 
 - Coalesce will return the first not null value, if all values are null it will return null
 - So in this case we require at least email or phone to be provided.
@@ -104,7 +111,7 @@ CREATE TABLE contact (
 
 ---
 
-##### Delete table
+#### Delete table
 
 - This query will delete specific table.
 
@@ -114,7 +121,7 @@ DROP TABLE people;
 
 ---
 
-##### Create index
+#### Create index
 
 - Index is useful for search optimizations, especially, when operating on the entire tables
 - But there is also downsides. It increase the size of the disk space we need. And is slowing operations like insert, update and delete.
@@ -135,7 +142,7 @@ CREATE INDEX users_name_idx ON users(name);
 
 ---
 
-##### Modify column of existing table
+#### Modify column of existing table
 
 - We can modify the columns settings of already exisiting tables.
 - Similarly we can add Unique or Check constraints.
@@ -149,7 +156,7 @@ ALTER TABLE people ALTER COLUMN name SET NOT NULL;
 
 ---
 
-##### Insert data into a table
+#### Insert data into a table
 
 - Note that values are in single quotes.
 - Provided values order should match the expected values.
@@ -167,7 +174,7 @@ VALUES ('Mira', 'Sofia', 5800, 2200.50), ('Iva', 'Plovdiv', 7200, 1900);
 
 ---
 
-##### Read data
+#### Read data
 
 - This way we will read all the table's data.
 
@@ -187,7 +194,7 @@ SELECT * FROM people;
 
 ---
 
-##### Read partial data
+#### Read partial data
 
 - This way we will read only specific columns.
 
@@ -207,7 +214,7 @@ SELECT name, city FROM people;
 
 ---
 
-##### Read and transform data
+#### Read and transform data
 
 - We can use math operators with different columns values.
 - With AS we can get meaningful column names.
@@ -229,7 +236,7 @@ FROM people;
 
 ---
 
-##### Sum values
+#### Sum values
 
 - Sum is aggregate function which will combine all rows in a sum.
 
@@ -249,7 +256,7 @@ SELECT sum(income) AS total FROM people;
 
 ---
 
-##### Use functions
+#### Use functions
 
 - We can use functions to transform the output.
 
@@ -269,7 +276,7 @@ SELECT CONCAT (name, ' lives in ', UPPER(city), '.') AS sentence FROM people;
 
 ---
 
-##### Filter results
+#### Filter results
 
 - This is how we can filter results.
 - If working with date and time it is recommended to cast them.
@@ -289,7 +296,7 @@ SELECT name, city FROM people WHERE monthly_income >= 7000 AND city = 'Plovdiv';
 
 ---
 
-##### Between value or in array of values
+#### Between value or in array of values
 
 - This is how we can filter results.
 
@@ -309,7 +316,7 @@ WHERE monthly_income BETWEEN 5000 AND 7000 AND city IN ('Sofia', 'Varna');
 
 ---
 
-##### Update value
+#### Update value
 
 - We can update all values or some, based on condition.
 
@@ -329,7 +336,7 @@ UPDATE people SET monthly_income = 6900 WHERE name = 'Mira' OR city = 'Sofia';
 
 ---
 
-##### Update value conditionally
+#### Update value conditionally
 
 - Advanced update
 
@@ -366,7 +373,7 @@ WHERE people.id = holidays.person_id AND (people.salary <= 2100 OR people.salary
 
 ---
 
-##### Delete row/rows
+#### Delete row/rows
 
 - We can delete all rows or some, based on condition.
 
@@ -387,7 +394,7 @@ DELETE FROM people WHERE name = 'Mira';
 
 ### Joining tables
 
-##### Inner Join
+#### Inner Join
 
 - Inner join will return result which are match in both tables.
 
@@ -426,7 +433,7 @@ FROM users AS u INNER JOIN images AS i ON u.id = i.user_id;
 
 ---
 
-##### Left Join
+#### Left Join
 
 - Left join will get all the records from the table on the left.
 
@@ -467,7 +474,7 @@ FROM users AS u LEFT JOIN images AS i ON u.id = i.user_id;
 
 ---
 
-##### Join with condition
+#### Join with condition
 
 - Display only users who commented on their own pics.
 
@@ -511,7 +518,7 @@ WHERE c.user_id = i.user_id;
 
 ---
 
-##### Join on generated table
+#### Join on generated table
 
 - Except directly selecting a table we can also use generated by union two tables
 
@@ -579,7 +586,7 @@ INNER JOIN activities AS activities ON activities.user_id = users.id;
 
 ---
 
-##### Grouping data
+#### Grouping data
 
 - Group by is creating multiple subtables based on what we group by and executing aggregate functions on those subtables.
 - After the select we can only have columns which appear after group by or aggreagte functions
@@ -606,7 +613,7 @@ GROUP BY city;
 
 ---
 
-##### Grouping data with having
+#### Grouping data with having
 
 - WHERE will filter first some of the rows, then GROU BY will create subgroups and HAVING will filter the subgroups.
 - Based on the above text, WHERE is filtering based on individual rows and HAVING on whole groups.
@@ -632,7 +639,7 @@ HAVING COUNT(*) > 1;
 
 ---
 
-##### Sorting data
+#### Sorting data
 
 - We will first sort by city ascending, then equal cities will be sorted by price descending and last by name.
 - Ascending is by default so no need to specify it.
@@ -664,7 +671,7 @@ ORDER BY city, income DESC, name;
 
 ---
 
-##### Skip and limit results
+#### Skip and limit results
 
 - Useful for example for pagination.
 
@@ -687,7 +694,7 @@ SELECT * FROM people ORDER BY income LIMIT 2 OFFSET 2;
 
 ---
 
-##### Union results
+#### Union results
 
 - Useful for combining the result of different queries in a single table.
 - Both queries must produce similar column structure. The number of columns selected in the first select must match with the second select.
@@ -719,7 +726,7 @@ UNION ALL
 
 ---
 
-##### Sub queries
+#### Sub queries
 
 - With sub queries we can use the result of one query in another.
 - Very important note here is to understand the returned type of the subquery. It is not table with one or many columns and rows. It is scalar type, single value which we can reuse. Basically, because the result is one column and one row.
@@ -742,7 +749,7 @@ SELECT * FROM people WHERE income > (
 
 ---
 
-##### Sub queries in the select clause
+#### Sub queries in the select clause
 
 - For our custom column we will have value calculated with the scalar result returned by the subquery.
 
@@ -765,7 +772,7 @@ FROM people ORDER BY income DESC;
 
 ---
 
-##### Sub queries in the from clause
+#### Sub queries in the from clause
 
 - We are required to use alias AS c even if we don't use it.
 - Outside the subquery, we can only use columns from the subquery.
@@ -791,7 +798,7 @@ FROM (
 
 ---
 
-##### Sub queries with join
+#### Sub queries with join
 
 - We will get users who purchased rice
 
@@ -836,7 +843,7 @@ INNER JOIN (
 
 ---
 
-##### Sub queries in where clause
+#### Sub queries in where clause
 
 - Inner select will return 1 column only so we can use it as array of values.
 
@@ -874,7 +881,7 @@ SELECT id FROM purchases WHERE user_id IN (
 
 ---
 
-##### Another subquery example
+#### Another subquery example
 
 - With ALL we will select onlyy users which have income higher than anyone from Plovdiv.
 - With similar syntax with using SOME we can also achieve filtering behaviour.
@@ -900,7 +907,7 @@ SELECT * FROM users WHERE income > ALL (
 
 ---
 
-##### Select unique values
+#### Select unique values
 
 - We will count all unique values, without count we would get once Sofia and once Plovdiv.
 - COUNT function will check for count of something we need.
@@ -921,7 +928,7 @@ SELECT COUNT(DISTINCT city) FROM users;
 
 ---
 
-##### Switch case
+#### Switch case
 
 - With Case we can get conditional value.
 
@@ -953,7 +960,7 @@ FROM users;
 
 ---
 
-##### Insights
+#### Insights
 
 - With the following query we can get info of how our query was processed.
 - For example we can see the execution time of our query.
@@ -991,7 +998,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE name = 'Eli';
 
 ---
 
-##### Transaction
+#### Transaction
 
 - Transaction are usefull for operations requiring multiple queries depending on each other. If one of the queries for example fail we might want to cancel all the other queries.
 - BEGIN will begin the transaction duplicating imaginary database on which we can run commands and the changes will be applied once we commit them.
@@ -1018,53 +1025,85 @@ COMMIT;
 
 ---
 
-##### View of a query
+#### View of a query
 
-- View is a virtual table
+- VIEW is a virtual table
 - The view is not physically materialized. Instead, the query is run every time the view is referenced in a query
 - In pgAdmin you can find your views under Schemas then public then Views
 - In case % sign is what we want to search for, we have to use '\' to escape it.
 
-| name    |
-| ------- |
-| Apple   |
-| Orange  |
-| Plum    |
-| Avocado |
+| name   | city    | income |
+| ------ | ------- | ------ |
+| Mira   | Sofia   | 5200   |
+| Iva    | Plovdiv | 5100   |
+| Sonia  | Sofia   | 5500   |
+| Martin | Sofia   | 4900   |
+| Toni   | Plovdiv | 5000   |
 
 ```sql
-CREATE VIEW my_fruits AS SELECT * FROM fruits WHERE name LIKE 'A%';
+CREATE VIEW my_friends AS SELECT name, city, income FROM persons WHERE name LIKE '%n%';
 ```
 
 Now, let's use our newly created view.
 
 ```sql
-SELECT * FROM my_fruits;
+SELECT * FROM my_friends;
 ```
 
-| name    |
-| ------- |
-| Apple   |
-| Avocado |
+| name   | city    | income |
+| ------ | ------- | ------ |
+| Sonia  | Sofia   | 5500   |
+| Martin | Sofia   | 4900   |
+| Toni   | Plovdiv | 5000   |
 
 We can further narrow the results by applying additional filters to our view.
 
 ```sql
-SELECT * FROM my_fruits WHERE name LIKE 'Av%';
+SELECT * FROM my_friends WHERE name LIKE '%in%';
 ```
 
-| name    |
-| ------- |
-| Avocado |
+| name   | city  | income |
+| ------ | ----- | ------ |
+| Martin | Sofia | 4900   |
 
 ---
 
-##### Delete a view
+#### Delete a view
 
 - Because views are stored in the database, this is how we can delete one of them
 
 ```sql
-DROP VIEW my_fruits;
+DROP VIEW my_friends;
+```
+
+---
+
+#### Materialized view
+
+- Materialized view will store the results, so we will need to refresh it in case data was added, updated or removed from the table after we created the materialized view.
+
+| name   | city    | income |
+| ------ | ------- | ------ |
+| Mira   | Sofia   | 5200   |
+| Iva    | Plovdiv | 5100   |
+| Sonia  | Sofia   | 5500   |
+| Martin | Sofia   | 4900   |
+| Toni   | Plovdiv | 5000   |
+
+```sql
+CREATE MATERIALIZED VIEW my_friends AS SELECT name, city, income FROM persons WHERE name LIKE '%n%';
+```
+
+Now, let's use our newly created materialized view.
+
+```sql
+SELECT * FROM my_friends;
+```
+
+Now if more data is added, updated or removed, we will get outdated results with our materialized view. We can refresh it by running additional query.
+
+```sql
+REFRESH MATERIALIZED VIEW my_friends;
 ```
 
 ---
