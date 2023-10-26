@@ -1,10 +1,3 @@
-<style>
-  td, th {
-    /* some styles to make the tables smaller */
-    padding: 0px 5px !important;
-  }
-</style>
-
 #### Create new database user
 
 - This query will create new user with which we can access the database.
