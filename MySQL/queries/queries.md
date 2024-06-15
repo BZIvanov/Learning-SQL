@@ -8,8 +8,16 @@ show databases;
 
 ##### Create database:
 
+We should create our own separate database to use, not just using the default one.
+
 ```sql
 CREATE DATABASE some_name;
+```
+
+or
+
+```sql
+CREATE DATABASE  IF NOT EXISTS `some_name`;
 ```
 
 ---
@@ -105,6 +113,12 @@ DESC people;
 
 ```sql
 DROP TABLE people;
+```
+
+or in a safe way
+
+```sql
+DROP TABLE IF EXISTS people;
 ```
 
 ---
