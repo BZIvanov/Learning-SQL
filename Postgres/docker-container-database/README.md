@@ -1,39 +1,48 @@
-# About
+# Postgres with Docker setup
 
-This is an example of how to setup a PostgreSQL database in a docker container so you don't have to install PostgreSQL locally.
+This is a simple example of how to set up a PostgreSQL database in a Docker container, so you don't need to install PostgreSQL locally.
 
-It would be nice if you have Docker desktop installed for a better experience with Docker.
+For a better experience, it's recommended to have Docker Desktop installed.
 
-# Docker containers
+## Running the Docker containers
 
-Run the below command in the terminal to start the containers:
+After preparing your `docker-compose.yml` file, run the following command in your terminal to start the containers:
 
 ```bash
 docker compose up -d
 ```
 
-Run the below command in the terminal to stop the containers:
+To stop the containers:
 
 ```bash
 docker compose stop
 ```
 
-# PgAdmin
+## Accessing pgAdmin
 
-Once the containers are up and running, visit http://localhost:5050 to access pgAdmin. You can find the login credentials in the `docker-compose.yml` file.
+Once the containers are running, open `http://localhost:5050` in your browser to access pgAdmin. The **login credentials** (email and password) are defined in your `docker-compose.yml` file under the `my-database-admin` service.
 
-Then right-click `Servers` and `Register` new `Server`.
+## Connecting to PostgreSQL
 
-On the `General` tab provide a `Name` for the server. It could be any name you want.
+1. After logging in, right-click on `Servers` in the left sidebar.
+2. Choose `Register` → `Server...`.
 
-On the `Connection` tab you should provide the following values (should match the values from docker-compose.yml):
+### General Tab
 
-- Host name/address - my-database (should match the service name from docker-compose.yml)
-- Port - 5432
-- Maintenance database - postgres
-- Username - postgres
-- Password - postgres
+- **Name**: Choose any name you like (e.g., `LocalDB`).
 
-Now you should be able to find your database by expanding `Servers`.
+### Connection Tab
 
-Right-click your database and select `Query Tool`, which will open a query window, where you can start writing your queries.
+- **Host name/address**: `my-database` (must match the service name from your `docker-compose.yml`)
+- **Port**: `5432`
+- **Maintenance database**: `postgres`
+- **Username**: `postgres`
+- **Password**: `postgres`
+
+Click **Save** to register the server.
+
+## Running SQL queries
+
+- Expand the `Servers` tree to find your database.
+- Right-click on the database and select **Query Tool**.
+- You can now start writing and executing SQL queries.
