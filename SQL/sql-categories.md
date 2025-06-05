@@ -1,5 +1,7 @@
 # SQL Categories
 
+---
+
 ## DQL – Data Query Language
 
 **Purpose**: Retrieve data from the database.
@@ -9,6 +11,8 @@
 - `SELECT` – fetches data from one or more tables
 
 💡 DQL is used to **read or query** data, not change it.
+
+---
 
 ## DML – Data Manipulation Language
 
@@ -21,6 +25,8 @@
 - `DELETE` – removes data
 
 💡 DML is used to **change the actual content** of the database.
+
+---
 
 ## DDL – Data Definition Language
 
@@ -35,6 +41,8 @@
 
 💡 Think of DDL as the **blueprint** of the database.
 
+---
+
 ## DTL / TCL – Data Transaction Language (often called Transaction Control Language)
 
 **Purpose**: Manage database transactions — groups of operations that must be executed together.
@@ -46,6 +54,8 @@
 - `ROLLBACK` – undoes changes since the last commit
 
 💡 DTL/TCL ensures **data integrity** by controlling how changes are saved or reverted.
+
+---
 
 ## DCL – Data Control Language
 

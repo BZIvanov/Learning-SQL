@@ -1,13 +1,18 @@
 # Relationships
 
-Contains general info for relationships using SQL database.
+This guide explains the concept of relationships in relational databases using SQL. For DBMS-specific syntax (like PostgreSQL or MySQL), see the respective section.
 
-# Primary key
+---
 
-Primary key is a column of unique values to make all rows unique.
-In the primary key we provide as argument which column we want to be the primary key.
-If we have Auto increment added, we don't need to provide an id every time we add new row to the table.
-Primary key column can not be NULL. We can have more than one column in a table which is primary key, this is called composite columns.
+## 🔑 Primary Key
+
+A **primary key** is a column (or set of columns) that uniquely identifies each row in a table.
+
+- Values must be **unique** and **not null**
+- Automatically creates a **unique index**
+- A table can have **one primary key**, which can consist of **multiple columns** (a **composite key**)
+
+If the column is set to **auto-increment**, you don’t need to manually provide a value when inserting rows.
 
 ```sql
 CREATE TABLE students (
@@ -20,21 +25,21 @@ CREATE TABLE students (
 
 ---
 
-# Relationships types
+## Relationships types
 
-## One to One
+### One-to-One
 
-One row from one table is related to only one row from another table.
+Each row in Table A relates to **one and only one** row in Table B.
 
-For example User table where one user takes only one row and UserDetails table, where for one user there is only row of details.
+Example: A `users` table and a `user_details` table where each user has one details record.
 
 ---
 
-## One to Many
+### One-to-Many
 
-One row from one table is related to many rows from another table.
+Each row in Table A can relate to **many rows** in Table B.
 
-For example Customers table where customer takes only one row and Orders table, where for one customer from the Customers table are related many orders in the Orders table.
+Example: A customer can have many orders.
 
 In the Orders (many) table we will keep the id of the specific customer from the Customers (one) table.
 
@@ -56,21 +61,23 @@ In the Orders (many) table we will keep the id of the specific customer from the
 | 3        | 2020-06-19 | 23.45  | 2           |
 | 4        | 2020-11-09 | 9.50   | 3           |
 
-_Note: naming columns doesn't matter, not neccessary to be customer_id for both tables. We specify that reference when creating the table with foreign key._
+Note: Column names don’t need to match across tables. You define the relationship using a **foreign key**.
 
 ---
 
-## Many to Many
+### Many-to-Many
 
-Many rows from one table are related to many rows from another table.
+Rows in Table A can relate to **many rows** in Table B, and vice versa.
 
-For example Books table can have multiple authors from another Authors table if more than one author is contributing to a specific book. And one author can have more than one book.
+Example: Books can have multiple authors, and authors can write multiple books.
+
+To model this, use a **junction table** (e.g., `book_authors`) with foreign keys to both related tables.
 
 ---
 
-## Foreign key
+## 🔑 Foreign key
 
-It is a column of id's for example which point to another table's primary keys. In that way they are related.
+A foreign key is a column that links one table to another by referencing its primary key.
 
 ```sql
 CREATE TABLE customers(
@@ -88,7 +95,7 @@ CREATE TABLE orders(
 );
 ```
 
-This way when we add record to the orders table we have to provide valid id which exists in the customers table, otherwise we get error.
+This ensures that each order references a valid customer, otherwise we get error.
 
 ---
 
@@ -96,13 +103,7 @@ This way when we add record to the orders table we have to provide valid id whic
 
 ### Cross join
 
-It will join both tables in a way, where for each row from the first tables all the rows from the second table will be joined. For example first table first row joined with second table first row; then first table first row joined with second table second row and so on for all rows from second table, and then for all other rows from first table.
-
-```sql
-SELECT * FROM customers, orders;
-```
-
-or
+Combines every row from the first table with every row from the second table (Cartesian product).
 
 ```sql
 SELECT * FROM customers CROSS JOIN orders;
@@ -110,29 +111,29 @@ SELECT * FROM customers CROSS JOIN orders;
 
 ### Inner join
 
-With inner join we will get only the rows where we have a match between the 2 tables.
-
-Inner join is the default one, so not neccessary to specify it.
+Returns only the rows with matching values in both tables.
 
 ```sql
 SELECT * FROM customers
 JOIN orders ON customers.id = orders.customer_id;
 ```
 
+`INNER` is optional because it's the default.
+
 ### Outer join
 
-#### Left outer join (left join)
+#### Left join (left outer join)
 
-With left join we will get everything from the left table even if we don't have a match from the right table. In other words left outer join returns all the rows from the left table with the matching rows from the right table and if there are no columns matching in the right table it return NULL values.
+Returns all rows from the left table, and matched rows from the right. If there’s no match, NULLs are returned.
 
 ```sql
 SELECT * FROM customers
 LEFT JOIN orders ON customers.id = orders.customer_id;
 ```
 
-#### Right outer join (right join)
+#### Right join (right outer join)
 
-With right join we will get everything from the right table even if we don't have a match from the left table. Basically it is reversed on the left join.
+Returns all rows from the right table, and matched rows from the left. NULLs are returned if no match.
 
 ```sql
 SELECT * FROM customers
@@ -141,4 +142,14 @@ RIGHT JOIN orders ON customers.id = orders.customer_id;
 
 #### Full outer join
 
-Full outer join is not supported by MySQL, but we can achieve it by using left join and right join with union.
+Returns all rows from both tables. If there’s no match, NULLs are returned.
+
+Not supported in MySQL directly, but can be simulated:
+
+```sql
+SELECT * FROM customers
+LEFT JOIN orders ON customers.id = orders.customer_id
+UNION
+SELECT * FROM customers
+RIGHT JOIN orders ON customers.id = orders.customer_id;
+```
