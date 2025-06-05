@@ -2,13 +2,8 @@
 
 Contains learning materials for SQL.
 
-# Content
+## Content of this repository
 
 - **SQL** - contains general information for SQL.
-- **Postgres** - contains information for using PostgreSQL as a database.
-  - docker-container-database - example of how to quickly setup database in a docker container to test queries
-  - exercises - example exercises to test your skills
-  - queries - examples of different queries
+- **PostgreSQL** - contains information for using PostgreSQL as a database.
 - **MySQL** - contains information for using MySQL as a database.
-  - exercises - example exercises to test your skills
-  - queries - examples of different queries
