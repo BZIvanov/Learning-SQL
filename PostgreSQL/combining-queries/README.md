@@ -2,6 +2,8 @@
 
 Contains rules for combining result sets (same number & type of columns)
 
+Common keywords: `UNION ALL`
+
 ---
 
 ### Union results

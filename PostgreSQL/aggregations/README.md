@@ -2,6 +2,8 @@
 
 Contains examples for aggregating data.
 
+Common keywords: `GROUP BY`, `HAVING`, `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`
+
 ---
 
 ### Grouping data

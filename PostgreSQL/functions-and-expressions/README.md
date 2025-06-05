@@ -2,6 +2,8 @@
 
 Contains example for functions and expressions.
 
+Common keywords: `CREATE FUNCTION`, `CASE`
+
 ---
 
 ### Switch case

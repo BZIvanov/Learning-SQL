@@ -2,6 +2,8 @@
 
 Contains examples for how to mutate data.
 
+Common keywords: `INSERT INTO`, `UPDATE`, `DELETE`, `RETURNING`, `BEGIN`, `COMMIT`, `ROLLBACK`
+
 ---
 
 ### Create new database user

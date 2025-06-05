@@ -2,6 +2,8 @@
 
 Contains examples for subqueries and Common Table Expressions (CTEs).
 
+Common keywords: `SELECT`, `WITH`
+
 ---
 
 ### Sub queries

@@ -2,6 +2,8 @@
 
 Contains examples for how to optimize queries
 
+Common keywords: `EXPLAIN`, `ANALYZE`, `BTREE`, `GIN`, `HASH`
+
 ---
 
 ### Create index

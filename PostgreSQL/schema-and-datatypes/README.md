@@ -2,6 +2,8 @@
 
 Contains examples for how to handle schemas and data types.
 
+Common keywords: `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `CHECK`, `NOT NULL`
+
 ---
 
 ### Modify column of existing table

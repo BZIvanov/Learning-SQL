@@ -2,6 +2,8 @@
 
 Contains examples for how to join tables.
 
+Common keywords: `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`
+
 ---
 
 ### Inner Join

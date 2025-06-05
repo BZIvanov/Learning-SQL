@@ -2,6 +2,8 @@
 
 Contains examples about views.
 
+Common keywords: `VIEW`, `MATERIALIZED VIEW`
+
 ---
 
 ### View of a query
