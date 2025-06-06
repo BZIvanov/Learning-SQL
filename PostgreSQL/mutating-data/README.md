@@ -2,7 +2,7 @@
 
 Contains examples for how to mutate data.
 
-Common keywords: `INSERT INTO`, `UPDATE`, `DELETE`, `RETURNING`, `BEGIN`, `COMMIT`, `ROLLBACK`
+Common keywords: `CREATE`, `INSERT INTO`, `UPDATE`, `DELETE`, `RETURNING`, `BEGIN`, `COMMIT`, `ROLLBACK`
 
 ---
 

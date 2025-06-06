@@ -2,7 +2,7 @@
 
 Contains examples for how to query data.
 
-Common keywords: `SELECT`, `FROM`, `WHERE`, `LIMIT`, `OFFSET`, `ORDER BY`
+Common keywords: `SELECT`, `FROM`, `WHERE`, `LIMIT`, `OFFSET`, `ORDER BY`, `DISTINCT`, `AS`, `BETWEEN`
 
 ---
 
@@ -60,7 +60,7 @@ SELECT city, name FROM people;
 ### Read and transform data
 
 - We can use math operators with different columns values.
-- With `AS` we can get meaningful column names.
+- With `AS` we can get meaningful column names using aliases.
 
 | name | city    | monthly_income | travel_spendings |
 | ---- | ------- | -------------- | ---------------- |
@@ -76,46 +76,6 @@ FROM people;
 | ---- | ------- | ----------------------- |
 | Mira | 3599.50 | 37.93965517241379310300 |
 | Iva  | 5300    | 26.38888888888888888900 |
-
----
-
-### Sum values
-
-- `sum` is aggregate function which will combine all rows in a sum.
-
-| name  | income |
-| ----- | ------ |
-| Mira  | 3500   |
-| Iva   | 3700   |
-| Mitko | 3900   |
-
-```sql
-SELECT sum(income) AS total FROM people;
-```
-
-| total |
-| ----- |
-| 11100 |
-
----
-
-### Use functions
-
-- We can use functions to transform the output of a query.
-
-| name | city    | monthly_income | travel_spendings |
-| ---- | ------- | -------------- | ---------------- |
-| Mira | Sofia   | 5800           | 2200             |
-| Iva  | Plovdiv | 7200           | 1900             |
-
-```sql
-SELECT CONCAT(name, ' lives in ', UPPER(city), '.') AS sentence FROM people;
-```
-
-| sentence              |
-| --------------------- |
-| Mira lives in SOFIA.  |
-| Iva lives in PLOVDIV. |
 
 ---
 
@@ -154,6 +114,25 @@ WHERE monthly_income BETWEEN 5000 AND 7000 AND city IN ('Sofia', 'Varna');
 | name | city  |
 | ---- | ----- |
 | Mira | Sofia |
+
+---
+
+### Unique values
+
+| name | city    |
+| ---- | ------- |
+| Mira | Sofia   |
+| Iva  | Plovdiv |
+| Sam  | Sofia   |
+
+```sql
+SELECT DISTINCT city FROM people;
+```
+
+| city    |
+| ------- |
+| Sofia   |
+| Plovdiv |
 
 ---
 
