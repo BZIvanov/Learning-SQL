@@ -115,10 +115,10 @@ Returns only the rows with matching values in both tables.
 
 ```sql
 SELECT * FROM customers
-JOIN orders ON customers.id = orders.customer_id;
+INNER JOIN orders ON customers.id = orders.customer_id;
 ```
 
-`INNER` is optional because it's the default.
+For Inner Join `INNER` keyword is optional because it's the default.
 
 ### Outer join
 

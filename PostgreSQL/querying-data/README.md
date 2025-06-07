@@ -2,7 +2,7 @@
 
 Contains examples for how to query data.
 
-Common keywords: `SELECT`, `FROM`, `WHERE`, `LIMIT`, `OFFSET`, `ORDER BY`, `DISTINCT`, `AS`, `BETWEEN`
+Common keywords: `SELECT`, `FROM`, `WHERE`, `LIMIT`, `OFFSET`, `ORDER BY`, `DISTINCT`, `AS`, `BETWEEN`, `AND`, `OR`, `IN`, `NOT`, `LIKE`
 
 ---
 
