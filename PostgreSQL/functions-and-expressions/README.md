@@ -2,7 +2,7 @@
 
 Contains example for functions and expressions.
 
-Common keywords: `CONCAT`, `UPPER`, `TRIM`, `SUBSTRING`, `CREATE FUNCTION`, `CASE`
+Common keywords: `CONCAT`, `UPPER`, `TRIM`, `SUBSTRING`, `REPLACE`, `ROUND`, `ABS`, `DAY`, `MONTH`, `YEAR`, `FORMAT`, `CREATE FUNCTION`, `CASE`
 
 ---
 
@@ -10,10 +10,10 @@ Common keywords: `CONCAT`, `UPPER`, `TRIM`, `SUBSTRING`, `CREATE FUNCTION`, `CAS
 
 - We can use functions to transform the output of a query.
 
-| name | city    | monthly_income | travel_spendings |
-| ---- | ------- | -------------- | ---------------- |
-| Mira | Sofia   | 5800           | 2200             |
-| Iva  | Plovdiv | 7200           | 1900             |
+| name | city    |
+| ---- | ------- |
+| Mira | Sofia   |
+| Iva  | Plovdiv |
 
 ```sql
 SELECT CONCAT(name, ' lives in ', UPPER(city), '.') AS sentence FROM people;

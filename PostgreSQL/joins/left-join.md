@@ -40,3 +40,44 @@ FROM users AS u LEFT JOIN images AS i ON u.id = i.user_id;
 | 5   | Marina | null | null        | null    |
 
 ---
+
+### Multiple joins
+
+**_users_**
+
+| id<sup>PK</sup> | name |
+| --------------- | ---- |
+| 1               | Mira |
+| 2               | Iva  |
+| 3               | John |
+
+**_orders_**
+
+| id<sup>PK</sup> | total | user_id<sup>FK</sup> |
+| --------------- | ----- | -------------------- |
+| 1               | 100   | 1                    |
+| 2               | 80    | 1                    |
+| 3               | 50    | 2                    |
+
+**_cities_**
+
+| id<sup>PK</sup> | city    | user_id<sup>FK</sup> |
+| --------------- | ------- | -------------------- |
+| 1               | Sofia   | 1                    |
+| 2               | Plovidv | 2                    |
+
+```sql
+SELECT u.name, c.city, o.total AS order_total
+FROM users u
+LEFT JOIN cities c ON u.id = c.user_id
+LEFT JOIN orders o ON u.id = o.user_id;
+```
+
+| name | city    | order_total |
+| ---- | ------- | ----------- |
+| Mira | Sofia   | 100         |
+| Mira | Sofia   | 80          |
+| Iva  | Plovidv | 50          |
+| John | NULL    | NULL        |
+
+---
