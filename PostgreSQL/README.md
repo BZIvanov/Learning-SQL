@@ -7,7 +7,7 @@
 3. **combining-queries**
 4. **mutating-data**
 5. **joins**
-6. **aggregations**
+6. **window-functions**
 7. **subqueries-and-ctes**
 8. **schema-and-datatypes**
 9. **functions-and-expressions**
