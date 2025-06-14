@@ -124,7 +124,7 @@ INNER JOIN (
 ) AS activities ON activities.user_id = users.id;
 ```
 
-or alternative syntax using common table expression
+or alternative syntax using Common Table Expression
 
 ```sql
 WITH activities AS (

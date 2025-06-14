@@ -2,8 +2,6 @@
 
 Contains examples for Information Schema.
 
-Common keywords: `SELECT`, `WITH`
-
 ---
 
 ### Check if a table exists
