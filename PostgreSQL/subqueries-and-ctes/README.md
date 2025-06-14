@@ -6,7 +6,7 @@ Common keywords: `SELECT`, `WITH`
 
 ---
 
-### Sub queries
+### Subqueries
 
 - With sub queries we can use the result of one query in another.
 - Very important note here is to understand the returned type of the subquery. It is not table with one or many columns and rows. It is scalar type, single value which we can reuse. Basically, because the result is one column and one row.
@@ -40,7 +40,7 @@ SELECT * FROM people WHERE income > (
 | Evgeni   | 4250   |
 
 ```sql
-SELECT name, income, income / (SELECT max(income) FROM people) AS ratio
+SELECT name, income, income / (SELECT MAX(income) FROM people) AS ratio
 FROM people ORDER BY income DESC;
 ```
 
@@ -66,7 +66,7 @@ FROM people ORDER BY income DESC;
 | Deni | Sofia   | 4900   |
 
 ```sql
-SELECT avg(c.cities_count)
+SELECT AVG(c.cities_count)
 FROM (
   SELECT city, COUNT(*) AS cities_count FROM people GROUP BY city
 ) AS c;

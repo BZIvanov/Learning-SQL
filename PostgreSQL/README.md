@@ -11,8 +11,9 @@
 7. **subqueries-and-ctes**
 8. **schema-and-datatypes**
 9. **functions-and-expressions**
-10. **indexes-and-performance**
-11. **views**
-12. **roles-and-permissions**
-13. **stored-procedures**
-14. **exercises**
+10. **information-schema**
+11. **indexes-and-performance**
+12. **views**
+13. **roles-and-permissions**
+14. **stored-procedures**
+15. **exercises**
