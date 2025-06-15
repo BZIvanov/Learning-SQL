@@ -14,6 +14,7 @@
 10. **information-schema**
 11. **indexes-and-performance**
 12. **views**
-13. **roles-and-permissions**
-14. **stored-procedures**
-15. **exercises**
+13. **ctas-and-temp-tables**
+14. **roles-and-permissions**
+15. **stored-procedures**
+16. **exercises**

@@ -1,6 +1,6 @@
 # Common Table Expressions (CTEs)
 
-Common keywords: `WITH`
+Common keywords: `WITH`, `RECURSIVE`
 
 ---
 
@@ -39,5 +39,31 @@ JOIN sales_dept sd ON e.department_id = sd.id;
 | ----- |
 | Alice |
 | Carol |
+
+---
+
+### Recursive CTE
+
+```sql
+WITH RECURSIVE counter(n) AS (
+    SELECT 1
+    UNION ALL
+    SELECT n + 1 FROM counter WHERE n < 10
+)
+SELECT * FROM counter;
+```
+
+| n   |
+| --- |
+| 1   |
+| 2   |
+| 3   |
+| 4   |
+| 5   |
+| 6   |
+| 7   |
+| 8   |
+| 9   |
+| 10  |
 
 ---

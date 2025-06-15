@@ -1,88 +1,40 @@
 # Views
 
-Contains examples about views.
+- A `VIEW` is a **virtual table** that represents the result of a SQL query.
+- The view itself **does not store data**; the underlying query is executed **each time** the view is used.
+- In **pgAdmin**, you can find your views under: `Schemas → public → Views`
 
-Common keywords: `VIEW`, `MATERIALIZED VIEW`
+## Types of Views
 
----
+- **VIEW**:
 
-### View of a query
+  - Non-materialized (virtual)
+  - Always reflects the latest data from base tables
+  - Can be used like a table in `SELECT`, `JOIN`, etc.
 
-- VIEW is a virtual table
-- The view is not physically materialized. Instead, the query is run every time the view is referenced in a query
-- In pgAdmin you can find your views under Schemas then public then Views
-- In case % sign is what we want to search for, we have to use '\' to escape it.
+- **MATERIALIZED VIEW**:
+  - Stores the result of the query physically
+  - Must be **refreshed manually or on schedule** to update
+  - Useful for performance when working with expensive queries
 
-| name   | city    | income |
-| ------ | ------- | ------ |
-| Mira   | Sofia   | 5200   |
-| Iva    | Plovdiv | 5100   |
-| Sonia  | Sofia   | 5500   |
-| Martin | Sofia   | 4900   |
-| Toni   | Plovdiv | 5000   |
+## Use Cases
 
-```sql
-CREATE VIEW my_friends AS SELECT name, city, income FROM persons WHERE name LIKE '%n%';
-```
+- **Simplifying complex queries**  
+  Abstract joins, filters, or calculations behind a readable interface.
 
-Now, let's use our newly created view.
+- **Data security and access control**  
+  Expose only specific columns or rows (e.g., omit salaries or sensitive info).
 
-```sql
-SELECT * FROM my_friends;
-```
+- **Logical data separation**  
+  Represent subsets of data (e.g., `active_users_view`, `top_customers_view`).
 
-| name   | city    | income |
-| ------ | ------- | ------ |
-| Sonia  | Sofia   | 5500   |
-| Martin | Sofia   | 4900   |
-| Toni   | Plovdiv | 5000   |
+- **Report building**  
+  Reuse common queries for analytics without repeating logic in every report.
 
-We can further narrow the results by applying additional filters to our view.
+- **Performance (materialized views only)**  
+  Precompute and store results for expensive queries, improving read performance.
 
-```sql
-SELECT * FROM my_friends WHERE name LIKE '%in%';
-```
+## Content of this section
 
-| name   | city  | income |
-| ------ | ----- | ------ |
-| Martin | Sofia | 4900   |
-
----
-
-### Delete a view
-
-- Because views are stored in the database, this is how we can delete one of them
-
-```sql
-DROP VIEW my_friends;
-```
-
----
-
-### Materialized view
-
-- Materialized view will store the results, so we will need to refresh it in case data was added, updated or removed from the table after we created the materialized view.
-
-| name   | city    | income |
-| ------ | ------- | ------ |
-| Mira   | Sofia   | 5200   |
-| Iva    | Plovdiv | 5100   |
-| Sonia  | Sofia   | 5500   |
-| Martin | Sofia   | 4900   |
-| Toni   | Plovdiv | 5000   |
-
-```sql
-CREATE MATERIALIZED VIEW my_friends AS SELECT name, city, income FROM persons WHERE name LIKE '%n%';
-```
-
-Now, let's use our newly created materialized view.
-
-```sql
-SELECT * FROM my_friends;
-```
-
-Now if more data is added, updated or removed, we will get outdated results with our materialized view. We can refresh it by running additional query.
-
-```sql
-REFRESH MATERIALIZED VIEW my_friends;
-```
+- **view**
+- **materialized-view**
