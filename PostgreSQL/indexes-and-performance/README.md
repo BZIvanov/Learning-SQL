@@ -2,63 +2,34 @@
 
 Contains examples for how to optimize queries
 
-Common keywords: `EXPLAIN`, `ANALYZE`, `BTREE`, `GIN`, `HASH`
+Common keywords: `EXPLAIN`, `ANALYZE`, `BTREE`, `GIN`, `HASH`, `UNIQUE`, `INDEX`
 
----
+## Data Pages
 
-### Create index
+- Every **table**, **index**, or **TOAST** object consists of a series of these pages stored in heap files.
+- PostgreSQL performs I/O in page units, not per row.
 
-- Index is useful for search optimizations, especially, when operating on the entire tables
-- But there is also downsides. It increase the size of the disk space we need. And is slowing operations like insert, update and delete.
-- The convention for naming indexes is first that table name, column name, idx
-- In pgAdmin you can see the indexes for a given table after you expand the table and then Indexes
+### Internal structure of a PostgreSQL page
 
-```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(20)
-);
+Each 8KB page includes:
 
-CREATE INDEX users_name_idx ON users(name);
-```
+1. **Page Header** — Information like LSN (Log Sequence Number), checksums, and visibility.
+2. **Item Identifiers** — Offsets/pointers to row data.
+3. **Tuples (Rows)** — The actual rows inserted.
+4. **Free space** — Leftover space used for updates/inserts to avoid moving rows around.
 
-| id<sup>PK</sup> | name |
-| --------------- | ---- |
+### Performance Implications
 
----
+- Queries read data one **page at a time**. A sequential scan may read many pages in order, while an index scan might jump around.
+- **HOT updates** (Heap-Only Tuples): Optimize updates by keeping modified versions within the same page.
+- **VACUUM** and **autovacuum** reclaim dead tuples but also aim to reuse free space in pages.
 
-### Insights
+### Indexes also use pages
 
-- With the following query we can get info of how our query was processed.
-- For example we can see the execution time of our query.
+- B-Tree, Hash, GIN, GiST indexes all use pages.
+- **Index pages** come in types: internal (tree nodes) and leaf (actual pointers to heap tuples).
 
-| id  | name |
-| --- | ---- |
-| 1   | Eli  |
-| 2   | Mira |
-| 3   | Toni |
+## Content of this section
 
-```sql
-EXPLAIN SELECT * FROM users WHERE name = 'Eli';
-```
-
-| QUERY PLAN                                                              |
-| ----------------------------------------------------------------------- |
-| Bitmap Heap Scan on users (cost=4.18..12.64 rows=4 width=62)            |
-| Recheck Cond: ((name)::text = 'Eli'::text)                              |
-| -> Bitmap Index Scan on users_name_idx (cost=0.00..4.18 rows=4 width=0) |
-| Index Cond: ((name)::text = 'Eli'::text)                                |
-
-```sql
-EXPLAIN ANALYZE SELECT * FROM users WHERE name = 'Eli';
-```
-
-| QUERY PLAN                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------- |
-| Bitmap Heap Scan on users (cost=4.18..12.64 rows=4 width=62) (actual time=0.016..0.016 rows=1 loops=1)            |
-| Recheck Cond: ((name)::text = 'Eli'::text)                                                                        |
-| Heap Blocks: exact=1                                                                                              |
-| -> Bitmap Index Scan on users_name_idx (cost=0.00..4.18 rows=4 width=0) (actual time=0.012..0.012 rows=1 loops=1) |
-| Index Cond: ((name)::text = 'Eli'::text)                                                                          |
-| Planning Time: 0.049 ms                                                                                           |
-| Execution Time: 0.031 ms                                                                                          |
+- **indexes**
+- **performance**

@@ -16,5 +16,5 @@
 12. **views**
 13. **ctas-and-temp-tables**
 14. **roles-and-permissions**
-15. **stored-procedures**
+15. **stored-programs**
 16. **exercises**

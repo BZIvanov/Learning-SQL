@@ -24,18 +24,6 @@ Indexes allow the database to **quickly locate rows** by looking them up in a so
 
 ---
 
-## How to create an index?
-
-```sql
--- Create a basic index on one column
-CREATE INDEX idx_users_email ON users(email);
-
--- Create a unique index (no duplicates allowed)
-CREATE UNIQUE INDEX idx_users_username ON users(username);
-```
-
----
-
 ## Notes
 
 - You can add indexes to **one or more columns** (multi-column indexes).
@@ -56,6 +44,42 @@ CREATE UNIQUE INDEX idx_users_username ON users(username);
 - The column is frequently used in `WHERE`, `JOIN`, or `ORDER BY`
 - You need to enforce uniqueness (use `UNIQUE`)
 - The table is large and performance is an issue
+
+---
+
+## Clustered vs Non-Clustered Index
+
+### Clustered Index
+
+- A clustered index determines the **physical order of data** in a table.
+- The table rows are **stored on disk in the same order as the index**.
+- There can be **only one clustered index per table**, because the rows can only be sorted one way physically.
+
+**Benefits**
+
+- Faster range queries and sorting.
+- Ideal for columns often used in `ORDER BY`, `BETWEEN`, or range filters.
+
+**Drawbacks**
+
+- Slower for random inserts into the middle of the index.
+- Only one per table.
+
+### Non-Clustered Index
+
+- A non-clustered index is a separate structure from the data.
+- It contains **pointers** (called row locators) to the actual rows.
+- You can have **multiple non-clustered indexes** on a table.
+
+**Benefits**
+
+- Flexible: multiple indexes for different query patterns.
+- Useful when queries target different columns.
+
+**Drawbacks**
+
+- Slightly slower than clustered indexes for retrieval (needs to follow a pointer).
+- Takes more space.
 
 ---
 

@@ -1,8 +1,8 @@
 # Functions and expressions
 
-Contains example for functions and expressions.
+Focus on **built-in functions** and **SQL expressions**.
 
-Common keywords: `CONCAT`, `UPPER`, `TRIM`, `SUBSTRING`, `REPLACE`, `ROUND`, `ABS`, `DAY`, `MONTH`, `YEAR`, `FORMAT`, `CREATE FUNCTION`, `CASE`
+Common keywords: `CONCAT`, `UPPER`, `TRIM`, `SUBSTRING`, `REPLACE`, `ROUND`, `ABS`, `DAY`, `MONTH`, `YEAR`, `FORMAT`, `CASE`
 
 ---
 
