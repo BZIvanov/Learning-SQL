@@ -17,4 +17,5 @@
 13. **ctas-and-temp-tables**
 14. **roles-and-permissions**
 15. **stored-programs**
-16. **exercises**
+16. **table-partitioning**
+17. **exercises**
